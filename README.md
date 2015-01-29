@@ -14,8 +14,8 @@ The choice to use separate tables to relate users with posts and posts with comm
 
 <h3>Wireframes</h3><br/>
 
-<img src="" alt="">
+<img src="loginwireframe.png" alt="the login screen">
 Login Screen<br/>
 
-<img src="" alt="">
+<img src="mainpagewireframe.png" alt="the main page">
 Home Screen
