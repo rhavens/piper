@@ -1,6 +1,7 @@
 from django.db import models
-from django.forms import ModelForm
+from django.forms import ModelForm, Textarea, URLInput
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.admin import widgets
 
 #class User(models.Model):
 #    id = models.AutoField(primary_key=True)
@@ -37,7 +38,7 @@ class Post (models.Model):
 class PostForm (ModelForm):
     class Meta:
         model = Post
-        fields = ['text_content', 'image_key']
+        fields = ['image_key', 'text_content']
         labels = {
             'text_content': _('Description'),
             'image_key': _('Image'),
@@ -47,9 +48,10 @@ class PostForm (ModelForm):
                 'max_length': _('Character limit is 200 characters'),
             },
         }
-#        widgets = {
-#            'text_content': Textarea(attrs={'cols': 80, 'rows': 20}),
-#        }
+        widgets = {
+            'text_content': Textarea(attrs={'cols': 80, 'rows': 20}),
+            'image_key': URLInput(),
+        }
 
 #class Comment (models.Model):
 #    id = models.AutoField(primary_key=True)
