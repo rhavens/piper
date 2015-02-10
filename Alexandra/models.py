@@ -47,9 +47,9 @@ class PostForm (ModelForm):
                 'max_length': _('Character limit is 200 characters'),
             },
         }
-        widgets = {
-            'text_content': Textarea(attrs={'cols': 80, 'rows': 20}),
-        }
+#        widgets = {
+#            'text_content': Textarea(attrs={'cols': 80, 'rows': 20}),
+#        }
 
 #class Comment (models.Model):
 #    id = models.AutoField(primary_key=True)
