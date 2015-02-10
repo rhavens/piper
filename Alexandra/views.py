@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
-from .models import User
+#from .models import User
 from .models import Post
 
 def index(request):
-    user = User.objects.all()
+#    user = User.objects.all()
     #names = ",".join(map(lamda x:x.username, user))
-    data = serializers.serialize('json', user)
-    return HttpResponse(data)
+#    data = serializers.serialize('json', user)
+#    return HttpResponse(data)
+    return HttpResponse('test')
 
 
 def posts(request):
