@@ -2,6 +2,9 @@ from django.db import models
 from django.forms import ModelForm, Textarea, URLInput
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import widgets
+import datetime
+from django.utils import timezone
+
 
 #class User(models.Model):
 #    id = models.AutoField(primary_key=True)
@@ -24,8 +27,8 @@ class Post (models.Model):
     text_content = models.CharField(max_length = 200)
 # for the mvp, perhaps just store a link instead of an s3 key
     image_key = models.CharField (max_length = 1024)
-    created_at = models.DateTimeField(editable=False)
-    last_modified = models.DateTimeField()
+    created_at = models.DateTimeField(editable=False, default=timezone.now)
+    last_modified = models.DateTimeField(default=timezone.now)
     def save(self, *args, **kwargs):
         if not self.id:
             self.created = datetime.datetime.today()

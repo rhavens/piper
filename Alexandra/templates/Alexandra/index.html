@@ -1,7 +1,12 @@
-{% if latest_question_list %}
+{% if latest_posts %}
     <ul>
-    {% for id in latest_post %}
-        <li><a href="/Alexandra/{{latest_post.text_content}}/" </a></li>
+    {% for post in latest_posts %}
+        <li>
+            {% if post.image_key %}
+            <img src='{{post.image_key}}' alt='user image'/>
+            {% endif %}
+            <p>{{post.text_content}}</p>
+        </li>
     {% endfor %}
     </ul>
 {% else %}
