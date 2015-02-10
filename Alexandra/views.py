@@ -13,7 +13,7 @@ def index(request):
 
 
 def posts(request):
-    latest_posts = Post.objects.order_by('id')
+    latest_posts = Post.objects.all()
     context = {'latest_posts' : latest_posts}
     return render(request,'Alexandra/index.html',  context)
     
