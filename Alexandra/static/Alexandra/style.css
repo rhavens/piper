@@ -1,6 +1,6 @@
 div.horizontal {
     position: relative;
-    top: 40px;
+    margin: 40px;
     width: 100%;
     height: 75%;
     overflow: auto;
@@ -9,10 +9,11 @@ div.horizontal {
 .table {
     display: table;
     table-layout: fixed;
-    width: 100%;
 }
 
 article {
+    position: relative;
+    padding: 20px;
     width: 400px;
     display: table-cell;
     background: #e3e3e3;
@@ -26,11 +27,6 @@ article:nth-child(2n+2)
 }
 
 img {  
-    width: 200px;
-    height: 150px;
+    width: 80%;
     overflow: hidden;
 }
-
-/*.post_section {
-    width: 500px;
-}*/
