@@ -9,36 +9,72 @@
     </head>
     
     <body>
-    
-        <div class="blog-masthead navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <nav class="blog-nav">
-                    <a class="blog-nav-item active" href="#">Home</a>
-                    <form class="navbar-form navbar-right">
-                        <input type="text" class="form-control" placeholder="Search...">
-                    </form>
-                </nav>
+
+        <nav class="blog-masthead navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Alexandra</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </form>
+                </div>
             </div>
-        </div>
+        </nav>
     
-        <div class="horizontal">
-            <div class="table">
-                {% if latest_posts %}
-                <td>
-                    {% for post in latest_posts %}
-                    <article class="all_posts" onclick="window.location.href = '/Alexandra/post/{{post.id}}'">
+        <div class="container-fluid">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">Reports</a></li>
+                    <li><a href="#">Analytics</a></li>
+                    <li><a href="#">Export</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a href="">Nav item</a></li>
+                    <li><a href="">Nav item again</a></li>
+                    <li><a href="">One more nav</a></li>
+                    <li><a href="">Another nav item</a></li>
+                    <li><a href="">More navigation</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a href="">Nav item again</a></li>
+                    <li><a href="">One more nav</a></li>
+                    <li><a href="">Another nav item</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div class="table">
+                    {% if latest_posts %}
+                    <td>
+                        {% for post in latest_posts %}
+                        <article class="all_posts" onclick="window.location.href = '/Alexandra/post/{{post.id}}'">
                         {% if post.image_key %}
                         <img src='{{post.image_key}}' alt='user image'/>
                         {% endif %}
                         {% if post.text_content %}
                         <p>{{post.text_content}}</p>
                         {% endif %}
-                    </article>
-                    {% endfor %}
-                </td>
-                {% else %}
-                <p>No posts are available.</p>
-                {% endif %}
+                        </article>
+                        {% endfor %}
+                    </td>
+                    {% else %}
+                    <p>No posts are available.</p>
+                    {% endif %}
+                </div>
             </div>
         </div>
     
@@ -46,7 +82,8 @@
         <script type="text/javascript" src="{% static 'Alexandra/enscroll-0.4.2.min.js' %}"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-                $('.horizontal').enscroll({
+                $('.container-fluid').enscroll({
+                    $(".container-fluid").height($(document).height());
                     horizontalTrackClass: 'horizontal-track2',
                     horizontalHandleClass: 'horizontal-handle2',
                     verticalScrolling: false,
