@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>A single post</title>
+    </head>
+
+    <body>
+        {% if post.image_key %}
+        <img src='{{post.image_key}}' alt='user image'/>
+        {% endif %}
+        {% if post.text_content %}
+        <p>{{post.text_content}}</p>
+        {% endif %}
+    </body>
+
+</html>
