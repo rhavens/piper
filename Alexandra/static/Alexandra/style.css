@@ -42,6 +42,6 @@ img {
     overflow: hidden;
 }
 
-.blog-masthead {
-    color: white;
+.navbar-default .navbar-brand {
+    color: #fff;
 }
