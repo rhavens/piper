@@ -22,6 +22,8 @@ def posts(request):
 
 
 def post(request, post_id):
+    if not Post.objects.filter(id=post_id):
+        return HttpResponse('Bad post id')
     thispost = Post.objects.get(id=post_id)
     return render(request, 'Alexandra/single_post.html', {'post': thispost})
 
