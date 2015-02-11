@@ -22,6 +22,7 @@ from django.utils import timezone
 #    )
 #    gender = models.CharField(max_length = 1, choices = GENDER_REGISTRATION, default = OTHER)
     
+
 class Post (models.Model):
     id = models.AutoField(primary_key=True)
     text_content = models.CharField(max_length = 200)
@@ -52,7 +53,7 @@ class PostForm (ModelForm):
             },
         }
         widgets = {
-            'text_content': Textarea(attrs={'cols': 80, 'rows': 20}),
+            'text_content': Textarea(attrs={'cols': 50, 'rows': 5}),
             'image_key': URLInput(),
         }
 
