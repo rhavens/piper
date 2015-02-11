@@ -11,10 +11,20 @@ div.horizontal {
     table-layout: fixed;
 }
 
-article {
+.all_posts {
     position: relative;
     padding: 20px;
     width: 400px;
+    display: table-cell;
+    background: #e3e3e3;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.single_post {
+    position: relative;
+    height: 400px;
+    padding: 40px;
     display: table-cell;
     background: #e3e3e3;
     vertical-align: middle;
