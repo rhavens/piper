@@ -38,6 +38,7 @@ h6, .h6 {
 .blog-masthead {
   height: 60px;
   border: none;
+  padding-top: 5px;
   background-color: #2f104e;
   -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
           box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
@@ -230,8 +231,8 @@ body {
 }
 @media (min-width: 768px) {
   .main {
-    padding-right: 40px;
-    padding-left: 40px;
+    padding-right: 20px;
+    padding-left: 20px;
   }
 }
 

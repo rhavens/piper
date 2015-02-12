@@ -1,12 +1,3 @@
-div.horizontal {
-    position: relative;
-    margin: 40px;
-    margin-top: 80px;
-    width: 100%;
-    height: 75%;
-    overflow: auto;
-}
-
 .table {
     display: table;
     table-layout: fixed;
@@ -40,8 +31,4 @@ article:nth-child(2n+2)
 img {  
     width: 80%;
     overflow: hidden;
-}
-
-.navbar-default .navbar-brand {
-    color: #fff;
 }
