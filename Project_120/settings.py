@@ -13,23 +13,23 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Added by us after the fact
-PROJECT_DIR = os.path.dirname(__file__)
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."),)
-APP_DIR = os.path.abspath(os.path.join(PROJECT_DIR, '../Alexandra/'))
+#PROJECT_DIR = os.path.dirname(__file__)
+#PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."),)
+#APP_DIR = os.path.abspath(os.path.join(PROJECT_DIR, '../Alexandra/'))
 
-STATICFILES_DIRS = (os.path.join(APP_DIR, 'static'),)
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-STATIC_ROOT = (os.path.join(PROJECT_DIR, 'static'),)
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'djangobower.finders.BowerFinder',
-)
-BOWER_COMPONENTS_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'components'))
-BOWER_INSTALLED_APPS = (
-    'jquery',
-    'semantic-ui',
-)
+#STATICFILES_DIRS = (os.path.join(APP_DIR, 'static'),)
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+#STATIC_ROOT = (os.path.join(PROJECT_DIR, 'static'),)
+#STATICFILES_FINDERS = (
+#    'django.contrib.staticfiles.finders.FileSystemFinder',
+#    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'djangobower.finders.BowerFinder',
+#)
+#BOWER_COMPONENTS_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'components'))
+#BOWER_INSTALLED_APPS = (
+#    'jquery',
+#    'semantic-ui',
+#)
 
 #end added
 

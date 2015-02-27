@@ -8,10 +8,7 @@
     <meta name=viewport content="width=device-width, initial-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.13.0/css/semantic.min.css">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700,300&subset=latin,vietnamese" tyle="text/css">
-    <link rel="stylesheet" href="{% static 'Alexandra/main.css' %}">
-    <link rel="stylesheet" href="{% static 'Alexandra/shape.css' %}">
+    <link rel="stylesheet" href="{% static 'Alexandra/Semantic/semantic.css' %}">
 </head>
 
 <body>
@@ -55,12 +52,10 @@
     </main>
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script type="text/javascript" src="{% static 'Alexandra/semantic.min.js' %}"></script>
-    <script type="text/javascript" src="http://s3.amazonaws.com/tx-live/live.js"></script>
-    <script type="text/javascript" src="{% static 'Alexandra/shape.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Alexandra/Semantic/semantic.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.post.shape').shape();
+            $('.shape').shape();
         });
     </script>
 </body>
