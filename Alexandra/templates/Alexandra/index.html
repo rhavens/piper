@@ -12,50 +12,118 @@
 </head>
 
 <body>
-    <nav class="ui fixed menu inverted navbar">
-        <a href="" class="brand item">Piper</a>
-    </nav>
+    <div class="ui grid">
+        <div class="one wide row"></div>
+        <h1 class="ui center aligned header">
+            Piper
+        </h1>
+    </div>
 
-    <main class="ui page grid">
-        <div class="row">
-            <div class="column">
-                {% if latest_posts %}
-                <div class="post ui shape">
-                    <div class="sides">
-                    {% for post in latest_posts %}
-                        <div class="side {% if forloop.first %}active{% endif %}">
-                            <div class="ui cards">
-                                <div class="card">
-                                    <div class="image">
-                                    {% if post.image_key %}
-                                        <a href="/Alexandra/post/{{post.id}}"><img src='{{post.image_key}}' alt='user image'/></a>
-                                    {% endif %}
+
+    <div class="ui visible inverted labeled icon top sidebar menu">
+        <a href="#" class="item">
+            <!--<i class="home icon"></i>-->
+            Home
+        </a>
+        <a href="#" class="item">
+            <!--<i class="comment outline icon"></i>-->
+            New Post
+        </a>
+    </div>
+
+    <div class="ui grid">
+        <div class="two wide column"></div>
+        <div class="three wide column">
+            <div class="ui card">
+                <div class="image">
+                    <img src="" alt=""/>
+                </div>
+                <div class="content">
+                    <a class="header">Current User's Name</a>
+                    <div class="description">
+                        Something here maybe
+                    </div>
+                    <div class="extra content">
+                        <div class="ui feed">
+                            <div class="event">
+                                <div class="label">
+                                    <img src="" alt=""/>
+                                </div>
+                                <div class="content">
+                                    <div class="summary">
+                                        <a href="#" class="user">
+                                            Some user
+                                        </a> did something
                                     </div>
-                                    <div class="content">
-                                    {% if post.text_content %}
-                                        <p class="description">{{post.text_content}}</p>
-                                    {% endif %}
+                                </div>
+                            </div>
+ 
+                            <div class="event">
+                                <div class="label">
+                                    <img src="" alt=""/>
+                                </div>
+                                <div class="content">
+                                    <div class="summary">
+                                        <a href="#" class="user">
+                                            Some user
+                                        </a> did something
+                                    </div>
+                                </div>
+                            </div>
+ 
+                            <div class="event">
+                                <div class="label">
+                                    <img src="" alt=""/>
+                                </div>
+                                <div class="content">
+                                    <div class="summary">
+                                        <a href="#" class="user">
+                                            Some user
+                                        </a> did something
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    {% endfor %}
-                    <div>
+                    </div>
                 </div>
-                {% else %}
-                <div class="ui message main">
-                    <h2>No posts are available.</h2>
-                </div>
-                {% endif %}
             </div>
         </div>
-    </main>
+        <div class="one wide column">
+            <div id="lefttransition" class="fluid ui left attached button"></div>
+        </div>
+        <div class="six wide column">
+            <div class="ui cube shape">
+                <div class="sides">
+{% for post in latest_posts %}
+                    <div class="side {% if forloop.first %}active{% endif%}">
+                        <div class="content">
+{% if post.image_key %}
+                            <a href="/Alexandra/post/{{post.id}}"><img src='{{post.image_key}}' alt='user image'/></a>
+                            <p class="center">{{post.text_content}}</p>
+{% endif %}
+                        </div>
+                    </div>
+{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="one wide column">
+            <div id="righttransition" class="fluid ui right attached button"></div> 
+        </div>
+        <div class="three wide column"></div>
+    </div>
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'Alexandra/Semantic/semantic.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('.shape').shape();
+            $('#lefttransition').click(function(){
+                $('.shape').shape('flip left');
+            });
+            $('#righttransition').click(function(){
+                $('.shape').shape('flip right');
+            });
         });
     </script>
 </body>
