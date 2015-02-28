@@ -25,7 +25,7 @@
             <!--<i class="home icon"></i>-->
             Home
         </a>
-        <a href="#" class="item">
+        <a href="../new_post" class="item">
             <!--<i class="comment outline icon"></i>-->
             New Post
         </a>
@@ -92,13 +92,15 @@
             <div id="lefttransition" class="fluid ui left attached button"></div>
         </div>
         <div class="six wide column">
-            <div class="ui cube shape">
+            <div class="ui shape">
                 <div class="sides">
 {% for post in latest_posts %}
                     <div class="side {% if forloop.first %}active{% endif%}">
                         <div class="content">
 {% if post.image_key %}
-                            <a href="/Alexandra/post/{{post.id}}"><img src='{{post.image_key}}' alt='user image'/></a>
+                            <a href="/Alexandra/post/{{post.id}}">
+                                <img class="ui image" src='{{post.image_key}}' alt='user image'/>
+                            </a>
                             <p class="center">{{post.text_content}}</p>
 {% endif %}
                         </div>
@@ -117,12 +119,12 @@
     <script type="text/javascript" src="{% static 'Alexandra/Semantic/semantic.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.shape').shape();
+            $('.ui.shape').shape();
             $('#lefttransition').click(function(){
-                $('.shape').shape('flip left');
+                $('.ui.shape').shape('flip left');
             });
             $('#righttransition').click(function(){
-                $('.shape').shape('flip right');
+                $('.ui.shape').shape('flip right');
             });
         });
     </script>
