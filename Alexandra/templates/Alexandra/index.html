@@ -36,10 +36,10 @@
         <div class="three wide column">
             <div class="ui card">
                 <div class="image">
-                    <img src="" alt=""/>
+                    <img src="fdsa" alt=""/>
                 </div>
                 <div class="content">
-                    <a class="header">Current User's Name</a>
+                    <a class="header">Name</a>
                     <div class="description">
                         Something here maybe
                     </div>
@@ -90,13 +90,13 @@
         </div>
 
         <!-- Vertical scrolling -->
-        <div class="eight wide column">
+        <div id="postsscroll" class="eight wide column">
             <div class="ui segment">
 {% for post in latest_posts %}
             <div class="ui vertical segment">
                 <div class="content">
 {% if post.image_key %}
-                    <img class="ui image center" src='{{post.image_key}}' alt='user image'/>
+                    <a href="/Alexandra/post/{{post.id}}"><img class="ui image center" src='{{post.image_key}}' alt='user image'/></a>
 {% endif %}
                     <p>{{post.text_content}}</p>
                     <div class="ui comments">
@@ -165,6 +165,7 @@
     <script type="text/javascript" src="{% static 'Alexandra/Semantic/semantic.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            /*
             $('.ui.shape').shape();
             $('#lefttransition').click(function(){
                 $('.ui.shape').shape('flip over');
@@ -172,6 +173,8 @@
             $('#righttransition').click(function(){
                 $('.ui.shape').shape('flip back');
             });
+            */
+            $('.ui.sticky').sticky();
         });
     </script>
 </body>
