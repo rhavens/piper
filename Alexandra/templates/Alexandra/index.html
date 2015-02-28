@@ -88,6 +88,51 @@
                 </div>
             </div>
         </div>
+
+        <!-- Vertical scrolling -->
+        <div class="eight wide column">
+            <div class="ui segment">
+{% for post in latest_posts %}
+            <div class="ui vertical segment">
+                <div class="content">
+{% if post.image_key %}
+                    <img class="ui image center" src='{{post.image_key}}' alt='user image'/>
+{% endif %}
+                    <p>{{post.text_content}}</p>
+                    <div class="ui comments">
+                        <h3 class="ui dividing header">Comments</h3>
+                        <!-- do a for each comment thing here -->
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="">
+                            </a>
+                            <div class="content">
+                                <a class="author">User1</a>
+                                <div class="metadata">
+                                    <span class="date">Today at 5:42PM</span>
+                                </div>
+                                <div class="text">
+                                    the comment.
+                                </div>
+                            </div>
+                        </div>
+                        <form class="ui reply form">
+                            <div class="field">
+                                <input type="text"></input>
+                            </div>
+                            <div class="ui blue labeled submit icon button">
+                                <i class="icon edit"></i>Comment
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+{% endfor %}
+            </div>
+        </div>
+        <!-- /Vertical scrolling -->
+
+        <!-- Horizontal transition
         <div class="one wide column">
             <div id="lefttransition" class="fluid ui left attached button"></div>
         </div>
@@ -112,6 +157,7 @@
         <div class="one wide column">
             <div id="righttransition" class="fluid ui right attached button"></div> 
         </div>
+        /Horizontal Transition -->
         <div class="three wide column"></div>
     </div>
     
@@ -121,10 +167,10 @@
         $(document).ready(function () {
             $('.ui.shape').shape();
             $('#lefttransition').click(function(){
-                $('.ui.shape').shape('flip left');
+                $('.ui.shape').shape('flip over');
             });
             $('#righttransition').click(function(){
-                $('.ui.shape').shape('flip right');
+                $('.ui.shape').shape('flip back');
             });
         });
     </script>
