@@ -1,0 +1,9 @@
+- Good Lord, is this a presentation?  The font is so small!
+- Too many bullet points and words on presentation
+- I don't care about non-performance problems
+- Optimization and Scaling is all over the place: you talk about databases, networking, caching.  Very unorganized.
++ You got the caching details right
+? Why address security challenges here? Is that related to performance? Explain yourselves...
+- No details on how your team is going to spend the money
+
+7 / 10
