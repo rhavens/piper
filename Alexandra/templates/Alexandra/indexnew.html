@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alexandra's Social Network</title>
+    <link rel='stylesheet' type='text/css' href="{% static 'Alexandra/jquery.fullPage.css' %}"/>
+</head>
+
+<body>
+    <div id='fullpage'>
+        <div class='section' id='section0'>
+            {% if latest_posts %}
+            {% for post in latest_posts %}
+            <div class='slide'>
+                <h1>{{post.text_content}}</h1>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>No posts available</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script type='text/javascript' src="{% static 'Alexandra/jquery.fullPage.js' %}"></script>
+    <script type='text/javascript'>
+        $(document).ready(function() {
+            $('#fullpage').fullpage({
+			    scrollingSpeed: 1000
+            });
+        });
+    </script>
+</body>
+</html>
