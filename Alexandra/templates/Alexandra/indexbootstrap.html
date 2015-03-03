@@ -1,0 +1,94 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Alexandra's social network</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'Alexandra/bootstrap.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'Alexandra/style.css' %}" />
+        <link href="{% static 'Alexandra/blog.css' %}" rel="stylesheet">
+    </head>
+    
+    <body>
+        <!-- NAVBAR -->
+        <nav class="blog-masthead navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{% url 'index' %}">Alexandra</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </form>
+                </div>
+            </div>
+        </nav>
+        <!-- /NAVBAR -->
+        <!-- SIDEBAR -->
+        <div class="container-fluid">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+                    <li><a href="{% url 'new_post' %}">New Post</a></li>
+                    <li><a href="#">Lorem</a></li>
+                    <li><a href="#">Ipsum</a></li>
+                    <li><a href="#">Dolor</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a href="">Sit</a></li>
+                    <li><a href="">Amet</a></li>
+                </ul>
+            </div>
+            <!-- /SIDEBAR -->
+            <!-- CONTENT -->
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div class="table">
+                    {% if latest_posts %}
+                    <td>
+                        {% for post in latest_posts %}
+                        <article class="all_posts" onclick="window.location.href = '/Alexandra/post/{{post.id}}'">
+                        {% if post.image_key %}
+                        <img src='{{post.image_key}}' alt='user image'/>
+                        {% endif %}
+                        {% if post.text_content %}
+                        <p>{{post.text_content}}</p>
+                        {% endif %}
+                        </article>
+                        {% endfor %}
+                    </td>
+                    {% else %}
+                    <p>No posts are available.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- /CONTENT -->
+        </div>
+    
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'Alexandra/enscroll-0.4.2.min.js' %}"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.container-fluid').enscroll({
+                    $(".container-fluid").height($(document).height());
+                    horizontalTrackClass: 'horizontal-track2',
+                    horizontalHandleClass: 'horizontal-handle2',
+                    verticalScrolling: false,
+                    horizontalScrolling: true,
+                    addPaddingToPane: true
+                });
+            });
+        </script>
+    
+    </body>
+</html>
