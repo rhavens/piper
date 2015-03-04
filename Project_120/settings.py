@@ -7,10 +7,12 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 
 # Added by us after the fact
 #PROJECT_DIR = os.path.dirname(__file__)
@@ -48,6 +50,7 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -58,6 +61,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Alexandra',
+    'storages',
+    'custom_storages',
 #    'djangobower',
 )
 
@@ -100,6 +105,23 @@ USE_L10N = True
 
 USE_TZ = True
 
+AWS_STORAGE_BUCKET_NAME = 'alexandra120'
+AWS_ACCESS_KEY_ID = 'AKIAIMBACAJZ23HNR6HQ'
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+STATICFILES_LOCATION = 'static'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
+MEDIAFILES_LOCATION = 'media'
+
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+
+MEDIA_ROOT = '/var/media/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/

@@ -55,7 +55,7 @@
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <div class="table">
                     <h1>New Post</h1>
-                    <form id='new_post_form' method='post' action='/Alexandra/new_post/'>
+                    <form id='new_post_form' method='post' enctype= "multipart/form-data" action='/Alexandra/new_post/'>
                         {% csrf_token %}
                         {% for hidden in form.hidden_fields %}
                             {{ hidden }}
@@ -67,7 +67,7 @@
                             {{ field }}
                         {% endfor %}
                         <br/>
-                        <input type='submit' name='submit' value='Submit new post' />
+                        <input type='submit' name='submit' value='Upload' />
                     </form>
                 </div>
             </div>

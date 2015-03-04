@@ -96,8 +96,8 @@
 {% for post in latest_posts %}
             <div class="ui vertical segment">
                 <div class="content">
-{% if post.image_key %}
-                    <a href="/Alexandra/post/{{post.id}}"><img class="ui image center" src='{{post.image_key}}' alt='user image'/></a>
+{% if post.image %}
+                    <a href="/Alexandra/post/{{post.id}}"><img class="ui image center" src='{{ post.image.url }}' alt='user image'/></a>
 {% endif %}
                     <p>{{post.text_content}}</p>
                     <div class="ui comments">

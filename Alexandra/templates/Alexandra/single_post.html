@@ -54,10 +54,10 @@
             <!-- CONTENT -->
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <div class="table">
-                    {% if post.image_key %}
+                    {% if post.image %}
                     <article class="single_post">
-                    {% if post.image_key %}
-                    <img src='{{post.image_key}}' alt='user image'/>
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" alt='user image'/>
                     {% endif %}
                     {% if post.text_content %}
                     <p>{{post.text_content}}</p>
