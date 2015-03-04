@@ -1,3 +1,6 @@
+import o
 import redis
-r = redis.StrictRedis(host='localhost', port=6379, db=0)
-r.set(X, 15)
+
+redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+redis = redis.from_url(redis_url)
+redis.get(x)
