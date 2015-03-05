@@ -1,5 +1,5 @@
 from django.db import models
-from django.forms import ModelForm, Textarea, URLInput
+from django.forms import ModelForm, Textarea, FileInput
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import widgets
 import datetime
@@ -27,7 +27,7 @@ class Post (models.Model):
     id = models.AutoField(primary_key=True)
     text_content = models.CharField(max_length = 200)
 # for the mvp, perhaps just store a link instead of an s3 key
-    image_key = models.CharField (max_length = 1024)
+    image = models.ImageField(upload_to='Alexandra', default='NULL')
     created_at = models.DateTimeField(editable=False, default=timezone.now)
     last_modified = models.DateTimeField(default=timezone.now)
     def save(self, *args, **kwargs):
@@ -42,10 +42,10 @@ class Post (models.Model):
 class PostForm (ModelForm):
     class Meta:
         model = Post
-        fields = ['image_key', 'text_content']
+        fields = ['image', 'text_content']
         labels = {
             'text_content': _('Description'),
-            'image_key': _('Image'),
+            'image': _('Image'),
         }
         error_messages = {
             'text_content': {
@@ -54,7 +54,7 @@ class PostForm (ModelForm):
         }
         widgets = {
             'text_content': Textarea(attrs={'cols': 50, 'rows': 5}),
-            'image_key': URLInput(),
+            'image': FileInput(),
         }
 
 #class Comment (models.Model):

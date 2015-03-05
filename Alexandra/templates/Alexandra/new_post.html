@@ -19,7 +19,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{% url 'index' %}">Alexandra</a>
+                    <a class="navbar-brand" href="/">Alexandra</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -39,7 +39,7 @@
         <div class="container-fluid">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li><a href="{% url 'index' %}">Overview</a></li>
+                    <li><a href="#">Overview</a></li>
                     <li class="active"><a href="{% url 'new_post' %}">New Post <span class="sr-only">(current)</span></a></li>
                     <li><a href="#">Lorem</a></li>
                     <li><a href="#">Ipsum</a></li>
@@ -55,7 +55,7 @@
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <div class="table">
                     <h1>New Post</h1>
-                    <form id='new_post_form' method='post' action='/Alexandra/new_post/'>
+                    <form id='new_post_form' method='post' enctype= "multipart/form-data" action='/Alexandra/new_post/'>
                         {% csrf_token %}
                         {% for hidden in form.hidden_fields %}
                             {{ hidden }}
@@ -67,7 +67,7 @@
                             {{ field }}
                         {% endfor %}
                         <br/>
-                        <input type='submit' name='submit' value='Submit new post' />
+                        <input type='submit' name='submit' value='Upload' />
                     </form>
                 </div>
             </div>
