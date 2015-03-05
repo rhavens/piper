@@ -5,3 +5,6 @@
 *~
 
 *.pyc
+
+# fabric files
+./fabfile/
