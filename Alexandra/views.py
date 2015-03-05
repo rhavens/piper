@@ -19,7 +19,7 @@ def index(request):
 
 def posts(request):
     latest_posts = Post.objects.order_by('-created_at')[:10]
-    context = {'latest_posts' : latest_posts}
+    context = {'latest_posts' : latest_posts, 'form':PostForm()}
     return render(request, 'Alexandra/index.html', context)
 
 
