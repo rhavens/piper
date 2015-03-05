@@ -14,14 +14,15 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
 # OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABIL-
 # ITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
-# SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+# SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
 import uuid
 
-class OriginAccessIdentity(object):
+class OriginAccessIdentity:
+
     def __init__(self, connection=None, config=None, id='',
                  s3_user_id='', comment=''):
         self.connection = connection
@@ -30,7 +31,7 @@ class OriginAccessIdentity(object):
         self.s3_user_id = s3_user_id
         self.comment = comment
         self.etag = None
-
+        
     def startElement(self, name, attrs, connection):
         if name == 'CloudFrontOriginAccessIdentityConfig':
             self.config = OriginAccessIdentityConfig()
@@ -52,7 +53,7 @@ class OriginAccessIdentity(object):
         new_config = OriginAccessIdentityConfig(self.connection,
                                                 self.config.caller_reference,
                                                 self.config.comment)
-        if comment is not None:
+        if comment != None:
             new_config.comment = comment
         self.etag = self.connection.set_origin_identity_config(self.id, self.etag, new_config)
         self.config = new_config
@@ -62,9 +63,9 @@ class OriginAccessIdentity(object):
 
     def uri(self):
         return 'origin-access-identity/cloudfront/%s' % self.id
+            
+class OriginAccessIdentityConfig:
 
-
-class OriginAccessIdentityConfig(object):
     def __init__(self, connection=None, caller_reference='', comment=''):
         self.connection = connection
         if caller_reference:
@@ -93,8 +94,8 @@ class OriginAccessIdentityConfig(object):
         else:
             setattr(self, name, value)
 
+class OriginAccessIdentitySummary:
 
-class OriginAccessIdentitySummary(object):
     def __init__(self, connection=None, id='',
                  s3_user_id='', comment=''):
         self.connection = connection
@@ -102,7 +103,7 @@ class OriginAccessIdentitySummary(object):
         self.s3_user_id = s3_user_id
         self.comment = comment
         self.etag = None
-
+        
     def startElement(self, name, attrs, connection):
         return None
 
@@ -118,4 +119,4 @@ class OriginAccessIdentitySummary(object):
 
     def get_origin_access_identity(self):
         return self.connection.get_origin_access_identity_info(self.id)
-
+    

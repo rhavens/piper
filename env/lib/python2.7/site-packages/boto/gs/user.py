@@ -20,7 +20,7 @@
 # IN THE SOFTWARE.
 
 
-class User(object):
+class User:
     def __init__(self, parent=None, id='', name=''):
         if parent:
             parent.owner = self
