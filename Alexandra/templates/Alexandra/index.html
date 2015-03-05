@@ -133,32 +133,6 @@
         </div>
         <!-- /Vertical scrolling -->
 
-        <!-- Horizontal transition
-        <div class="one wide column">
-            <div id="lefttransition" class="fluid ui left attached button"></div>
-        </div>
-        <div class="six wide column">
-            <div class="ui shape">
-                <div class="sides">
-{% for post in latest_posts %}
-                    <div class="side {% if forloop.first %}active{% endif%}">
-                        <div class="content">
-{% if post.image_key %}
-                            <a href="/Alexandra/post/{{post.id}}">
-                                <img class="ui image" src='{{post.image_key}}' alt='user image'/>
-                            </a>
-                            <p class="center">{{post.text_content}}</p>
-{% endif %}
-                        </div>
-                    </div>
-{% endfor %}
-                </div>
-            </div>
-        </div>
-        <div class="one wide column">
-            <div id="righttransition" class="fluid ui right attached button"></div> 
-        </div>
-        /Horizontal Transition -->
         <div class="three wide column"></div>
     </div>
     
@@ -166,16 +140,7 @@
     <script type="text/javascript" src="{% static 'Alexandra/Semantic/semantic.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            /*
-            $('.ui.shape').shape();
-            $('#lefttransition').click(function(){
-                $('.ui.shape').shape('flip over');
-            });
-            $('#righttransition').click(function(){
-                $('.ui.shape').shape('flip back');
-            });
-            */
-            $('.ui.sticky').sticky();
+           $('.ui.sticky').sticky();
         });
     </script>
 </body>
