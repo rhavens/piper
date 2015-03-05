@@ -54,7 +54,7 @@ fabconf['ADMIN_EMAIL'] = "admin@example.com"
 fabconf['GIT_USERNAME'] = "piperdeploy"
 
 # Name of the private key file used for github deployments
-fabconf['BITBUCKET_DEPLOY_KEY_NAME'] = "bitbucket_rsa"
+fabconf['BITBUCKET_DEPLOY_KEY_NAME'] = "bitbucketpiperdeploy"
 
 # Don't edit. Local path for deployment key you use for github
 fabconf['BITBUCKET_DEPLOY_KEY_PATH'] = "%s/%s" % (fabconf['SSH_PATH'], fabconf['BITBUCKET_DEPLOY_KEY_NAME'])
