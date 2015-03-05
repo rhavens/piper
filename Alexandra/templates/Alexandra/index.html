@@ -144,26 +144,33 @@
             New Post
         </div>
         <div class="content">
-           <form id='new_post_form' method='post' enctype= "multipart/form-data" action='/new_post/'>
+            <div class="ui form segment">
+            <form id='new_post_form' method='post' enctype= "multipart/form-data" action='/new_post/'>
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
                 {{ hidden }}
             {% endfor %}
             {% for field in form.visible_fields %}
-                <p>{{ field.label }}</p>
+            <div class="field">
+                <label>
+                {{ field.label }}
+                </label>
                 {{ field.errors }}
                 {{ field.help_text }}
                 {{ field }}
+            </div>
             {% endfor %}
             <br/>
-            <input type='submit' name='submit' value='Upload' />
-        </form>
+            <input class="ui positive right labeled button" type='submit' name='submit' value='Submit' />
+            </form>
+        </div>
  
         </div>
-        <div class="actions">
+<!--        <div class="actions">
             <div class="ui positive right labeled button">
                 Submit
             </div>
+            -->
         </div>
     </div>
     
