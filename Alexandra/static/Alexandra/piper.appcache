@@ -1,14 +1,16 @@
+CACHE MANIFEST
 # filename: piper.appcache
 
 # <html manifest = "blahbblah.appcache">
 #	...
 # </html>
 
-CACHE MANIFEST
 # 2015-03-05 v1.0.0
 
 CACHE:
-index.html
 Alexandra/semantic.min2.css
 Alexandra/piper.css
 Alexandra/Semantic/semantic.js
+
+NETWORK:
+index.html
