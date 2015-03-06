@@ -67,8 +67,12 @@ WSGI_APPLICATION = 'Project_120.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'piperdb',
+        'USER': 'piperadmin',
+        'PASSWORD': 'adminpassword',
+        'HOST': 'piperdbinstance.cop4dkmckeiy.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -85,9 +89,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-AWS_STORAGE_BUCKET_NAME = 'alexandra120'
-AWS_ACCESS_KEY_ID = 'AKIAIMBACAJZ23HNR6HQ'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'piperstatic'
+AWS_ACCESS_KEY_ID = 'AKIAJ5G3P56SBQ5CDIAQ'
+AWS_SECRET_ACCESS_KEY = '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'
 
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
