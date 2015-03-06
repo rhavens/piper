@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
+<html manifest="{% static 'Alexandra/piper.appcache' %}">
 <head>
     <meta charset="utf-8">
     <title>Piper</title>
@@ -9,27 +9,20 @@
     <meta name="mobile-web-app-capable" content="yes">
 
     <link rel="stylesheet" href="{% static 'Alexandra/Semantic/semantic.min2.css' %}">
+    <link rel="stylesheet" href="{% static 'Alexandra/piper.css' %}">
 </head>
 
 <body>
     <div class="ui grid">
         <div class="one wide row"></div>
         <div class="one wide row"></div>
-        <h1 class="ui center aligned header" style="
-            padding-top:40px;
-            padding-bottom:40px;
-            font-size:80px;
-            background-color:#FFF;
-            color:rgb(93, 193, 147);
-            font-family:helvetica;">
+        <h1 class="ui center aligned header title-text">
             Piper
         </h1>
     </div>
 
 
-    <div class="ui visible inverted labeled icon top sidebar menu" style="
-        border-bottom-color:white;
-        border-bottom-style:solid;">
+    <div class="ui visible inverted labeled icon top sidebar menu navbar-elem">
         <a href="#" class="item">
             <i class="home icon"></i>
             Home
@@ -40,8 +33,7 @@
         </a>
     </div>
 
-    <div class="ui grid" style="
-            background-color:rgb(202, 222, 195);">
+    <div class="ui grid site-bg">
         <div class="two wide column"></div>
         <div class="three wide column">
             <div class="ui card">
