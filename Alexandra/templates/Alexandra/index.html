@@ -35,7 +35,6 @@
             Home
         </a>
         <a id="newpostbutton" class="item">
-        <!--<a href="{% url 'new_post' %}" class="item">-->
             <i class="comment outline icon"></i>
             New Post
         </a>
@@ -156,30 +155,31 @@
             <div class="ui form segment">
             <form id='new_post_form' method='post' enctype= "multipart/form-data" action='/new_post/'>
             {% csrf_token %}
-            {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-            {% for field in form.visible_fields %}
             <div class="field">
                 <label>
-                {{ field.label }}
+                Image
                 </label>
-                {{ field.errors }}
-                {{ field.help_text }}
-                {{ field }}
+                <input id="id_image" name="image" type="file" />
+                <div id="id_image_styled" class="ui submit button">
+                <div>Upload an image</div>
+                </div>
             </div>
-            {% endfor %}
+            <div class="field">
+                <label>
+                Description
+                </label>
+                <textarea cols="50" id="id_text_content" maxlength="200" name="text_content" rows="5"></textarea>
+            </div>
             <br/>
-            <input class="ui positive right labeled button" type='submit' name='submit' value='Submit' />
+            <input id="new_post_submit" class="ui positive right labeled button" type='submit' name='submit' value='Submit' />
             </form>
-        </div>
+            </div>
  
         </div>
-<!--        <div class="actions">
-            <div class="ui positive right labeled button">
+        <div class="actions">
+            <div id="new_post_submit_styled" class="ui positive right labeled button">
                 Submit
             </div>
-            -->
         </div>
     </div>
     
@@ -187,10 +187,25 @@
     <script type="text/javascript" src="{% static 'Alexandra/Semantic/semantic.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-           $('.ui.sticky').sticky();
+            $('#id_image').hide();
+            $('#new_post_submit').hide();
+            $('.ui.sticky').sticky();
             $('#newpostbutton').click(function () {
                 $('.modal').modal('show');
-                this.preventDefault();
+            });
+            $('#id_image_styled').click(function () {
+                $('#id_image').click();
+            });
+            $('#new_post_submit_styled').click(function () {
+                $('#new_post_submit').click();
+            });
+            $('#id_image').change( function () {
+                var fileName = $(this).val().split('/').pop().split('\\').pop();
+                if (fileName) {
+                    $('#id_image_styled').html("<div>" + fileName + "</div>");
+                } else {
+                    $('#id_image_styled').html("<div>Upload an image</div>");
+                }
             });
         });
     </script>

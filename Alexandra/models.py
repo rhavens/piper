@@ -54,7 +54,7 @@ class PostForm (ModelForm):
         }
         widgets = {
             'text_content': Textarea(attrs={'cols': 50, 'rows': 5}),
-            'image': FileInput(attrs={'class': 'ui submit button'}),
+            'image': FileInput(),
         }
 
 #class Comment (models.Model):
