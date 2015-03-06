@@ -11,3 +11,6 @@ CACHE:
 Semantic/semantic.min2.css
 piper.css
 Semantic/semantic.js
+
+NETWORK:
+*

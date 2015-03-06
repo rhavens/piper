@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html manifest="piper.appcache">
+<html manifest="{% static 'Alexandra/piper.appcache' %}">
 <head>
     <meta charset="utf-8">
     <title>Piper</title>
@@ -38,7 +38,7 @@
         <div class="three wide column">
             <div class="ui card">
                 <div class="image">
-                    <img src="www.cs.tufts.edu/people/faculty/images/ming.jpg" alt="profile picture"/>
+                    <img src="http://www.cs.tufts.edu/people/faculty/images/ming.jpg" alt="profile picture"/>
                 </div>
                 <div class="content">
                     <a class="header">Name</a>
@@ -187,12 +187,13 @@
         </div>
     </div>
 
-    <div id="info"></div>
+    <!--<div id="info"></div>-->
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'Alexandra/Semantic/semantic.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            window.applicationCache.update();
             $('#id_image').hide();
             $('#new_post_submit').hide();
             $('.ui.sticky').sticky();
@@ -220,7 +221,7 @@
             $('#singlepostmodal.ui.modal').modal('show');
         }
     </script>
-
+<!--
 <script type="text/javascript">
             // when the page loads, set the status to online or offline
             function loadDemo() {
@@ -305,6 +306,7 @@
  
                 }
 </script>
+-->
 
 </body>
 </html>
