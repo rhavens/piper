@@ -24,7 +24,7 @@ class User(models.Model):
         if not self.id:
             self.created_at = datetime.datetime.today()
         self.last_modified = datetime.datetime.today()
-        return super(Post, self).save(*args, **kwargs)
+        return super(User, self).save(*args, **kwargs)
 
    
 
