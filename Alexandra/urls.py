@@ -14,6 +14,9 @@ urlpatterns = patterns ( '',
     url(r'^new_post/', views.new_post, name = 'new_post'),
     url(r'^api/posts/', include(post_resource.urls)),
     url(r'^api/users/', include(user_resource.urls)),
+#    url(r'^api/posts/doc/', include('tastypie_swagger.urls', namespace='post_tastypie_swagger'),
+#        kwargs={"tastypie_api_module":"Alexandra.registration.posts", "namespace":"post_tastypie_swagger"}
+#       ),
     )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

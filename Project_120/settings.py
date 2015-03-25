@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'custom_storages',
     'filebrowser',
     'tastypie',
+    'tastypie_swagger',
 )
 
 
@@ -118,3 +119,5 @@ MEDIA_ROOT = '/var/media/'
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#TASTYPIE_SWAGGER_API_MODULE = 'Alexandra.urls.api'
