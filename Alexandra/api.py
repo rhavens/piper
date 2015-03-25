@@ -50,11 +50,11 @@ class UserResource(ModelResource):
     class Meta:
         queryset = User.objects.all()
         resource_name = 'user'
-        authorization = PostObjectsAuthorization()
+        authorization = UserObjectsAuthorization()
 # excludes = ['password']
 
 class PostResource(ModelResource):
     class Meta:
         queryset = Post.objects.all()
         resource_name = 'post'
-        authorization = UserObjectsAuthorization()
+        authorization = PostObjectsAuthorization()
