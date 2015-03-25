@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'storages',
     'custom_storages',
     'filebrowser',
+    'tastypie',
 )
 
 

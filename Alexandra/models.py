@@ -6,22 +6,27 @@ import datetime
 from django.utils import timezone
 
 
-#class User(models.Model):
-#    id = models.AutoField(primary_key=True)
-#    username = models.CharField(max_length = 60)
-#    password = models.CharField(max_length = 60)
-#    email = models.CharField(max_length = 254)
-#    birthday = models.IntegerField(8)
-#    MALE = "M"
-#    FEMALE = "F"
-#    OTHER = "O"
-#    GENDER_REGISTRATION = (
-#      (MALE, 'Male'),
-#      (FEMALE, 'Female'),
-#      (OTHER, 'Other'),
-#    )
-#    gender = models.CharField(max_length = 1, choices = GENDER_REGISTRATION, default = OTHER)
-    
+class User(models.Model):
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length = 20)
+    password = models.CharField(max_length = 20)
+    email = models.CharField(max_length = 254)
+    birthday = models.IntegerField(8)
+    GENDER_REGISTRATION = (
+      ('M', 'Male'),
+      ('F', 'Female'),
+      ('O', 'Other'),
+    )
+    gender = models.CharField(max_length = 1, choices = GENDER_REGISTRATION, default = 'O')
+    created_at = models.DateTimeField(editable=False, default=timezone.now)
+    last_modified = models.DateTimeField(default=timezone.now)
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.created_at = datetime.datetime.today()
+        self.last_modified = datetime.datetime.today()
+        return super(Post, self).save(*args, **kwargs)
+
+   
 
 class Post (models.Model):
     id = models.AutoField(primary_key=True)
@@ -32,8 +37,8 @@ class Post (models.Model):
     last_modified = models.DateTimeField(default=timezone.now)
     def save(self, *args, **kwargs):
         if not self.id:
-            self.created = datetime.datetime.today()
-        self.modified = datetime.datetime.today()
+            self.created_at = datetime.datetime.today()
+        self.last_modified = datetime.datetime.today()
         return super(Post, self).save(*args, **kwargs)
     class Meta:
         get_latest_by = 'last_modified'
