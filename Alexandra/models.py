@@ -11,7 +11,7 @@ class User(models.Model):
     username = models.CharField(max_length = 20)
     password = models.CharField(max_length = 20)
     email = models.CharField(max_length = 254)
-    birthday = models.IntegerField(8)
+#    birthday = models.IntegerField(8)
     GENDER_REGISTRATION = (
       ('M', 'Male'),
       ('F', 'Female'),
