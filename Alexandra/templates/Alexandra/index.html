@@ -17,7 +17,7 @@
         <div class="one wide row"></div>
         <div class="one wide row"></div>
         <h1 class="ui center aligned header title-text">
-            Piper
+            <!--use the user's first name here-->Alexandra<!---->'s Piper
         </h1>
     </div>
 
@@ -33,7 +33,8 @@
         </a>
     </div>
 
-    <div class="ui grid site-bg">
+    <div class="ui center aligned grid site-bg">
+        <!--
         <div class="two wide column"></div>
         <div class="three wide column">
             <div class="ui card">
@@ -90,17 +91,19 @@
                 </div>
             </div>
         </div>
+        -->
 
         <!-- Vertical scrolling -->
-        <div id="postsscroll" class="eight wide column">
+        <div id="postsscroll" class="ten wide column">
             <div class="ui segment">
 {% for post in latest_posts %}
             <div class="ui vertical segment">
                 <div class="content">
 {% if post.image %}
-                    <a href="javascript:void(0);" onclick="LoadSinglePost({{post.id}});return false;"><!--<a href="./post/{{post.id}}">--><img id="postimage{{post.id}}" class="ui image center" src='{{ post.image.url }}' alt='user image'/></a>
+                    <a href="javascript:void(0);" onclick="LoadSinglePost({{post.id}});return false;"><img id="postimage{{post.id}}" class="ui image center" src='{{ post.image.url }}' alt='user image'/></a>
 {% endif %}
                     <p id="posttext{{post.id}}">{{post.text_content}}</p>
+                    <div class="left aligned column">
                     <div class="ui comments">
                         <h3 class="ui dividing header">Comments</h3>
                         <!-- do a for each comment thing here -->
@@ -127,6 +130,7 @@
                             </div>
                         </form>
                     </div>
+                    </div>
                 </div>
             </div>
 {% endfor %}
@@ -135,7 +139,7 @@
         <!-- /Vertical scrolling -->
 
 
-        <div class="three wide column"></div>
+        <!--<div class="three wide column"></div>-->
     </div>
 
     <div id="newpostmodal" class="ui modal">
