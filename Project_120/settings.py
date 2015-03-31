@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
@@ -49,7 +50,9 @@ INSTALLED_APPS = (
 )
 
 
+
 MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -57,7 +60,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 )
+
 
 ROOT_URLCONF = 'Project_120.urls'
 
@@ -78,6 +83,26 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.RedisCache',
+        'LOCATION': 'localhost:3000',
+        'OPTIONS': {
+            'DB': 1,
+            'PARSER_CLASS': 'redis.connection.HiredisParser',
+            'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
+            'CONNECTION_POOL_CLASS_KWARGS': {
+                'max_connections': 50,
+                'timeout': 20,
+            }
+        },
+    },
+}
+
+
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+SESSION_CACHE_ALIAS = "default"
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -94,12 +119,6 @@ USE_TZ = True
 AWS_STORAGE_BUCKET_NAME = 'piperstatic'
 AWS_ACCESS_KEY_ID = 'AKIAJ5G3P56SBQ5CDIAQ'
 AWS_SECRET_ACCESS_KEY = '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'
-
-AWS_IS_GZIPPED = True
-AWS_QUERYSTRING_AUTH = False
-AWS_HEADERS = {
-    'Cache-Control': 'public, max-age=3600',
-}
 
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
@@ -119,5 +138,3 @@ MEDIA_ROOT = '/var/media/'
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-
-#TASTYPIE_SWAGGER_API_MODULE = 'Alexandra.urls.api'

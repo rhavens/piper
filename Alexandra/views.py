@@ -4,9 +4,15 @@ from django.http import HttpResponse
 from django.core import serializers
 from django import forms
 from django.template import RequestContext
-#from .models import User
+#from .models import User 
 from .models import Post
 from .models import PostForm
+from django.core.cache import cache
+
+
+import cPickle from pickle 
+import sys
+
 # from .models import Document
 # from .forms import DocumentForm
 def index(request):
@@ -20,6 +26,7 @@ def index(request):
 def posts(request):
     latest_posts = Post.objects.order_by('-created_at')[:10]
     context = {'latest_posts' : latest_posts, 'form':PostForm()}
+
     return render(request, 'Alexandra/index.html', context)
 
 
@@ -41,5 +48,19 @@ def new_post(request):
     else:
          form = PostForm()
     return render(request, 'Alexandra/new_post.html', {'form': form})
+
+def set_cache(request):
+
+    latest_posts = Post.objects.order_by('-created_at')[:10]
+    
+    in_cache = cache.get('latest_view')
+
+    if in_cache:
+      message = "hit"
+    else:
+      message = "miss"
+      cache.set('latest_view', cPickle.dump(latest_posts, 60*15))
+
+    return HttpResponse(message)
 
 # Create your views here.
