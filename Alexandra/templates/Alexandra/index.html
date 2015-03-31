@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
+<html manifest="{% static 'Alexandra/piper.appcache' %}">
 <head>
     <meta charset="utf-8">
     <title>Piper</title>
@@ -8,47 +8,49 @@
     <meta name=viewport content="width=device-width, initial-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <link rel="stylesheet" href="{% static 'Alexandra/Semantic/semantic.css' %}">
+    <link rel="stylesheet" href="{% static 'Alexandra/Semantic/semantic.min2.css' %}">
+    <link rel="stylesheet" href="{% static 'Alexandra/piper.css' %}">
 </head>
 
 <body>
     <div class="ui grid">
         <div class="one wide row"></div>
         <div class="one wide row"></div>
-        <h1 class="ui center aligned header">
-            Piper
+        <h1 class="ui center aligned header title-text">
+            <!--use the user's first name here-->Alexandra<!---->'s Piper
         </h1>
     </div>
 
 
-    <div class="ui visible inverted labeled icon top sidebar menu">
+    <div class="ui visible inverted labeled icon top sidebar menu navbar-elem">
         <a href="#" class="item">
             <i class="home icon"></i>
             Home
         </a>
-        <a href="{% url 'new_post' %}" class="item">
+        <a id="newpostbutton" class="item">
             <i class="comment outline icon"></i>
             New Post
         </a>
     </div>
 
-    <div class="ui grid">
+    <div class="ui center aligned grid site-bg">
+        <!--
         <div class="two wide column"></div>
         <div class="three wide column">
             <div class="ui card">
                 <div class="image">
-                    <img src="fdsa" alt=""/>
+                    <img src="" alt="profile picture"/>
                 </div>
                 <div class="content">
                     <a class="header">Name</a>
                     <div class="description">
-                        Something here maybe
+                        Some status
                     </div>
                     <div class="extra content">
                         <div class="ui feed">
                             <div class="event">
                                 <div class="label">
-                                    <img src="" alt=""/>
+                                    <img src="" alt="thumbnail"/>
                                 </div>
                                 <div class="content">
                                     <div class="summary">
@@ -61,7 +63,7 @@
  
                             <div class="event">
                                 <div class="label">
-                                    <img src="" alt=""/>
+                                    <img src="" alt="thumbnail"/>
                                 </div>
                                 <div class="content">
                                     <div class="summary">
@@ -74,7 +76,7 @@
  
                             <div class="event">
                                 <div class="label">
-                                    <img src="" alt=""/>
+                                    <img src="" alt="thumbnail"/>
                                 </div>
                                 <div class="content">
                                     <div class="summary">
@@ -89,17 +91,19 @@
                 </div>
             </div>
         </div>
+        -->
 
         <!-- Vertical scrolling -->
-        <div id="postsscroll" class="eight wide column">
+        <div id="postsscroll" class="ten wide column">
             <div class="ui segment">
 {% for post in latest_posts %}
             <div class="ui vertical segment">
                 <div class="content">
-{% if post.image_key %}
-                    <a href="/Alexandra/post/{{post.id}}"><img class="ui image center" src='{{post.image_key}}' alt='user image'/></a>
+{% if post.image %}
+                    <a href="javascript:void(0);" onclick="LoadSinglePost({{post.id}});return false;"><img id="postimage{{post.id}}" class="ui image center" src='{{ post.image.url }}' alt='user image'/></a>
 {% endif %}
-                    <p>{{post.text_content}}</p>
+                    <p id="posttext{{post.id}}">{{post.text_content}}</p>
+                    <div class="left aligned column">
                     <div class="ui comments">
                         <h3 class="ui dividing header">Comments</h3>
                         <!-- do a for each comment thing here -->
@@ -126,6 +130,7 @@
                             </div>
                         </form>
                     </div>
+                    </div>
                 </div>
             </div>
 {% endfor %}
@@ -133,50 +138,140 @@
         </div>
         <!-- /Vertical scrolling -->
 
-        <!-- Horizontal transition
-        <div class="one wide column">
-            <div id="lefttransition" class="fluid ui left attached button"></div>
+
+        <!--<div class="three wide column"></div>-->
+    </div>
+
+    <div id="newpostmodal" class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            New Post
         </div>
-        <div class="six wide column">
-            <div class="ui shape">
-                <div class="sides">
-{% for post in latest_posts %}
-                    <div class="side {% if forloop.first %}active{% endif%}">
+        <div class="content">
+            <div class="ui form segment">
+            <form id='new_post_form' method='post' enctype= "multipart/form-data" action='/new_post/'>
+            {% csrf_token %}
+            <div class="field">
+                <label>
+                Image
+                </label>
+                <input id="id_image" name="image" type="file" />
+                <div id="id_image_styled" class="ui submit button">
+                <div>Upload an image</div>
+                </div>
+            </div>
+            <div class="field">
+                <label>
+                Description
+                </label>
+                <textarea cols="50" id="id_text_content" maxlength="200" name="text_content" rows="5"></textarea>
+            </div>
+            <br/>
+            <input id="new_post_submit" class="ui positive right labeled button" type='submit' name='submit' value='Submit' />
+            </form>
+            </div>
+ 
+        </div>
+        <div class="actions">
+            <div id="new_post_submit_styled" class="ui positive right labeled button">
+                Submit
+            </div>
+        </div>
+    </div>
+
+    <div id="singlepostmodal" class="ui basic long modal">
+        <i class="white close icon"></i>
+        <div class="content">
+            <div class="description">
+                <h3 id="singlepostdescription"></h3>
+            </div>
+        </div>
+        <div class="content">
+            <div class="ui large image">
+                <img id="singlepostimage" src='{{ post.image.url }}' alt='user image'/></a>
+            </div>
+        </div>
+        <div class="content">
+            <div class="ui comments">
+                <div class="ui segment">
+                    <h3 class="ui dividing header">Comments</h3>
+                    <!-- do a for each comment thing here -->
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="">
+                        </a>
                         <div class="content">
-{% if post.image_key %}
-                            <a href="/Alexandra/post/{{post.id}}">
-                                <img class="ui image" src='{{post.image_key}}' alt='user image'/>
-                            </a>
-                            <p class="center">{{post.text_content}}</p>
-{% endif %}
+                            <a class="author">User1</a>
+                            <div class="metadata">
+                                <span class="date">Today at 5:42PM</span>
+                            </div>
+                            <div class="text">
+                                the comment.
+                            </div>
                         </div>
                     </div>
-{% endfor %}
+                </div>
+                <form class="ui reply form">
+                    <div class="field">
+                        <input type="text"></input>
+                    </div>
+                    <div class="ui blue labeled submit icon button">
+                        <i class="icon edit"></i>Comment
+                    </div>
+                </form>
+            </div> 
+        </div>
+    </div>
+
+    <div class="main footer">
+        <div class="ui divider"></div>
+        <div class="ui center aligned grid">
+            <div class="column">
+                <div class="ui divided horizontal footer link list">
+                    <div class="item">
+                        Piper
+                    </div>
+                    <div class="item">
+                        <a href="{% static 'Alexandra/Leg5APIDoc.pdf' %}">API Documentation</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="one wide column">
-            <div id="righttransition" class="fluid ui right attached button"></div> 
-        </div>
-        /Horizontal Transition -->
-        <div class="three wide column"></div>
     </div>
-    
+
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'Alexandra/Semantic/semantic.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            /*
-            $('.ui.shape').shape();
-            $('#lefttransition').click(function(){
-                $('.ui.shape').shape('flip over');
-            });
-            $('#righttransition').click(function(){
-                $('.ui.shape').shape('flip back');
-            });
-            */
+            window.applicationCache.onupdateready = function(e) {
+                window.applicationCache.update();
+            }
+            $('#id_image').hide();
+            $('#new_post_submit').hide();
             $('.ui.sticky').sticky();
+            $('#newpostbutton').click(function () {
+                $('#newpostmodal').modal('show');
+            });
+            $('#id_image_styled').click(function () {
+                $('#id_image').click();
+            });
+            $('#new_post_submit_styled').click(function () {
+                $('#new_post_submit').click();
+            });
+            $('#id_image').change( function () {
+                var fileName = $(this).val().split('/').pop().split('\\').pop();
+                if (fileName) {
+                    $('#id_image_styled').html("<div>" + fileName + "</div>");
+                } else {
+                    $('#id_image_styled').html("<div>Upload an image</div>");
+                }
+            });
         });
+        function LoadSinglePost(postId) {
+            $('#singlepostimage').attr('src', $('#postimage' + postId).attr('src'));
+            $('#singlepostdescription').html($('#posttext' + postId).html());
+            $('#singlepostmodal.ui.modal').modal('show');
+        }
     </script>
 </body>
 </html>

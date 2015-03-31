@@ -1,0 +1,17 @@
+.title-text {
+	padding-top:40px !important;
+	padding-bottom:40px !important;
+	font-size:80px !important;
+	background-color:#FFF !important;
+	color:rgb(93, 193, 147) !important;
+	font-family:helvetica !important;
+}
+
+.navbar-elem {
+    border-bottom-color:white !important;
+    border-bottom-style:solid !important;
+}
+
+.site-bg {
+	background-color:rgb(202, 222, 195) !important;
+}

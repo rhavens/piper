@@ -1,39 +1,44 @@
 from django.db import models
-from django.forms import ModelForm, Textarea, URLInput
+from django.forms import ModelForm, Textarea, FileInput
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import widgets
 import datetime
 from django.utils import timezone
 
 
-#class User(models.Model):
-#    id = models.AutoField(primary_key=True)
-#    username = models.CharField(max_length = 60)
-#    password = models.CharField(max_length = 60)
-#    email = models.CharField(max_length = 254)
+class User(models.Model):
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length = 20)
+    password = models.CharField(max_length = 20)
+    email = models.CharField(max_length = 254)
 #    birthday = models.IntegerField(8)
-#    MALE = "M"
-#    FEMALE = "F"
-#    OTHER = "O"
-#    GENDER_REGISTRATION = (
-#      (MALE, 'Male'),
-#      (FEMALE, 'Female'),
-#      (OTHER, 'Other'),
-#    )
-#    gender = models.CharField(max_length = 1, choices = GENDER_REGISTRATION, default = OTHER)
-    
+    GENDER_REGISTRATION = (
+      ('M', 'Male'),
+      ('F', 'Female'),
+      ('O', 'Other'),
+    )
+    gender = models.CharField(max_length = 1, choices = GENDER_REGISTRATION, default = 'O')
+    created_at = models.DateTimeField(editable=False, default=timezone.now)
+    last_modified = models.DateTimeField(default=timezone.now)
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.created_at = datetime.datetime.today()
+        self.last_modified = datetime.datetime.today()
+        return super(User, self).save(*args, **kwargs)
+
+   
 
 class Post (models.Model):
     id = models.AutoField(primary_key=True)
     text_content = models.CharField(max_length = 200)
 # for the mvp, perhaps just store a link instead of an s3 key
-    image_key = models.CharField (max_length = 1024)
+    image = models.ImageField(upload_to='Alexandra', default='NULL')
     created_at = models.DateTimeField(editable=False, default=timezone.now)
     last_modified = models.DateTimeField(default=timezone.now)
     def save(self, *args, **kwargs):
         if not self.id:
-            self.created = datetime.datetime.today()
-        self.modified = datetime.datetime.today()
+            self.created_at = datetime.datetime.today()
+        self.last_modified = datetime.datetime.today()
         return super(Post, self).save(*args, **kwargs)
     class Meta:
         get_latest_by = 'last_modified'
@@ -42,10 +47,10 @@ class Post (models.Model):
 class PostForm (ModelForm):
     class Meta:
         model = Post
-        fields = ['image_key', 'text_content']
+        fields = ['image', 'text_content']
         labels = {
             'text_content': _('Description'),
-            'image_key': _('Image'),
+            'image': _('Image'),
         }
         error_messages = {
             'text_content': {
@@ -54,7 +59,7 @@ class PostForm (ModelForm):
         }
         widgets = {
             'text_content': Textarea(attrs={'cols': 50, 'rows': 5}),
-            'image_key': URLInput(),
+            'image': FileInput(),
         }
 
 #class Comment (models.Model):

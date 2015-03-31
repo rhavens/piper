@@ -1,0 +1,18 @@
+CACHE MANIFEST
+# filename: piper.appcache
+
+# <html manifest = "blahbblah.appcache">
+#	...
+# </html>
+
+# 2015-03-05 v1.0.0
+
+CACHE:
+Semantic/semantic.min2.css
+Semantic/semantic.js
+piper.css
+
+FALLBACK:
+
+NETWORK:
+*
