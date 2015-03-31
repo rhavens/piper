@@ -8,10 +8,8 @@ from django.template import RequestContext
 from .models import Post
 from .models import PostForm
 from django.core.cache import cache
+import cPickle as pickle
 
-
-import cPickle from pickle 
-import sys
 
 # from .models import Document
 # from .forms import DocumentForm
@@ -48,7 +46,7 @@ def new_post(request):
     else:
          form = PostForm()
     return render(request, 'Alexandra/new_post.html', {'form': form})
-<<<<<<< HEAD
+#
 
 def set_cache(request):
 
@@ -63,21 +61,5 @@ def set_cache(request):
       cache.set('latest_view', cPickle.dump(context, 60*15))
 
     return HttpResponse(message)
-=======
-
-def set_cache(request):
-
-    latest_posts = Post.objects.order_by('-created_at')[:10]
-    
-    in_cache = cache.get('latest_view')
-
-    if in_cache:
-      message = "hit"
-    else:
-      message = "miss"
-      cache.set('latest_view', cPickle.dump(latest_posts, 60*15))
-
-    return HttpResponse(message)
 
 # Create your views here.
->>>>>>> master
