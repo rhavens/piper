@@ -58,7 +58,7 @@ function PollWorker() {
                 for (j = 0; updates['objects'][j].id != recId && j < updates['objects'].length; ++j);
                 for (k = j - 1; k >= 0; --k) { 
                     RenderPost(updates['objects'][i]);
-                    posts = updates['objects'][i] + posts;
+                    posts.unshift(updates['objects'][i];
                 }
             }
         },
