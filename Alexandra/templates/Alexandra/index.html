@@ -97,13 +97,13 @@
         <div id="postsscroll" class="ten wide column">
             <div id="postlist" class="ui segment">
 {% for post in latest_posts %}
-            <div class="ui vertical segment">
+            <!--<div class="ui vertical segment">
                 <div class="content">
 {% if post.image %}
                     <a href="javascript:void(0);" onclick="LoadSinglePost({{post.id}});return false;"><img id="postimage{{post.id}}" class="ui image center" src='{{ post.image.url }}' alt='user image'/></a>
 {% endif %}
                     <p id="posttext{{post.id}}">{{post.text_content}}</p>
-                    <!--<div class="left aligned column">
+                    <div class="left aligned column">
                     <div class="ui comments">
                         <h3 class="ui dividing header">Comments</h3>
                         <!-- do a for each comment thing here -->
@@ -130,9 +130,9 @@
                             </div>
                         </form>
                     </div>
-                    </div>-->
+                    </div>
                 </div>
-            </div>
+            </div>-->
 {% endfor %}
             </div>
         </div>
