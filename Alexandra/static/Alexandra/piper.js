@@ -45,7 +45,7 @@ function PollWorker() {
     $.ajax({
         url: 'http://piper.link/api/posts/post/?format=json/',
         success: function(response) {
-            var updates = JSON.parse(response);
+            var updates = response;
             if (posts === null) {
                 posts = [];
                 for (i = updates['objects'].length - 1; i >= 0; --i) {
