@@ -95,7 +95,7 @@
 
         <!-- Vertical scrolling -->
         <div id="postsscroll" class="ten wide column">
-            <div class="ui segment">
+            <div id="postlist" class="ui segment">
 {% for post in latest_posts %}
             <div class="ui vertical segment">
                 <div class="content">
@@ -241,38 +241,7 @@
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'Alexandra/Semantic/semantic.js' %}"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            window.applicationCache.onupdateready = function(e) {
-                window.applicationCache.update();
-            }
-            $('#id_image').hide();
-            $('#new_post_submit').hide();
-            $('.ui.sticky').sticky();
-            $('#newpostbutton').click(function () {
-                $('#newpostmodal').modal('show');
-            });
-            $('#id_image_styled').click(function () {
-                $('#id_image').click();
-            });
-            $('#new_post_submit_styled').click(function () {
-                $('#new_post_submit').click();
-            });
-            $('#id_image').change( function () {
-                var fileName = $(this).val().split('/').pop().split('\\').pop();
-                if (fileName) {
-                    $('#id_image_styled').html("<div>" + fileName + "</div>");
-                } else {
-                    $('#id_image_styled').html("<div>Upload an image</div>");
-                }
-            });
-        });
-        function LoadSinglePost(postId) {
-            $('#singlepostimage').attr('src', $('#postimage' + postId).attr('src'));
-            $('#singlepostdescription').html($('#posttext' + postId).html());
-            $('#singlepostmodal.ui.modal').modal('show');
-        }
-    </script>
+    <script type="text/javascript" src="{% static 'Alexandra/piper.js' %}"></script>
 </body>
 </html>
 
