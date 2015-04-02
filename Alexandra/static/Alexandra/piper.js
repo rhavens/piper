@@ -26,7 +26,7 @@ $(document).ready(function () {
 });
 function PollWorker() {
     $.ajax({
-        url: 'http://www.piper.link/api/posts/post/?format=json',
+        url: 'http://piper.link/api/posts/post/?format=json',
         success: function(response) {
             var updates = JSON.parse(response);
             if (posts === null) {
