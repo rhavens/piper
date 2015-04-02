@@ -130,7 +130,7 @@
 /* #undef JEMALLOC_UTRACE */
 
 /* Support Valgrind. */
-/* #undef JEMALLOC_VALGRIND */
+#define JEMALLOC_VALGRIND 
 
 /* Support optional abort() on OOM. */
 /* #undef JEMALLOC_XMALLOC */
@@ -198,7 +198,7 @@
 #define LG_SIZEOF_INT 2
 
 /* sizeof(long) == 2^LG_SIZEOF_LONG. */
-#define LG_SIZEOF_LONG 2
+#define LG_SIZEOF_LONG 3
 
 /* sizeof(intmax_t) == 2^LG_SIZEOF_INTMAX_T. */
 #define LG_SIZEOF_INTMAX_T 3

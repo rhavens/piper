@@ -19,8 +19,8 @@ DATADIR := $(DESTDIR)/usr/local/share
 MANDIR := $(DESTDIR)/usr/local/share/man
 srcroot := 
 objroot := 
-abs_srcroot := /home/developer/comp120/comp120-spring2015-team5/Project_120/redis-stable/deps/jemalloc/
-abs_objroot := /home/developer/comp120/comp120-spring2015-team5/Project_120/redis-stable/deps/jemalloc/
+abs_srcroot := /home/jay/Dropbox/Comp120/socialnetwork/Project_120/redis-stable/deps/jemalloc/
+abs_objroot := /home/jay/Dropbox/Comp120/socialnetwork/Project_120/redis-stable/deps/jemalloc/
 
 # Build parameters.
 CPPFLAGS :=  -D_GNU_SOURCE -D_REENTRANT -I$(srcroot)include -I$(objroot)include

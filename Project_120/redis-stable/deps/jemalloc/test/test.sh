@@ -24,7 +24,7 @@ for t in $@; do
     echo
   fi
   echo "=== ${t} ==="
-  ${t} /home/developer/comp120/comp120-spring2015-team5/Project_120/redis-stable/deps/jemalloc/ /home/developer/comp120/comp120-spring2015-team5/Project_120/redis-stable/deps/jemalloc/
+  ${t} /home/jay/Dropbox/Comp120/socialnetwork/Project_120/redis-stable/deps/jemalloc/ /home/jay/Dropbox/Comp120/socialnetwork/Project_120/redis-stable/deps/jemalloc/
   result_code=$?
   case ${result_code} in
     ${pass_code})
