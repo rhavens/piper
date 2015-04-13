@@ -24,38 +24,7 @@ $(document).ready(function () {
         }
     });
 });
-function PollWorker() {
-    $.ajax({
-        url: 'http://piper.link/api/posts/post/?format=json',
-        success: function(response) {
-            var updates = JSON.parse(response);
-            if (posts === null) {
-                posts = [];
-                for (i = updates['objects'].length - 1; i >= 0; --i) {
-                    RenderPost(updates['objects'][i]);
-                    posts = updates['objects'][i] + posts;
-                }
-            } else {
-                var recId = posts[0].id;
-                var j;
-                for (j = 0; updates['objects'][j].id != recId && j < updates['objects'].length; ++j);
-                for (k = j - 1; k >= 0; --k) { 
-                    RenderPost(updates['objects'][i]);
-                    posts = updates['objects'][i] + posts;
-                }
-            }
-        },
-        complete: function() {
-            setTimeout(PollWorker, 2000);
-        }
-    });
-};
-PollWorker();
-function LoadSinglePost(postId) {
-    $('#singlepostimage').attr('src', $('#postimage' + postId).attr('src'));
-    $('#singlepostdescription').html($('#posttext' + postId).html());
-    $('#singlepostmodal.ui.modal').modal('show');
-}
+
 function RenderPost(post) {
     var posthtml = 
     "<div class='ui vertical segment'>" +
@@ -70,5 +39,39 @@ function RenderPost(post) {
     "</div></div>"; 
 
     $('#postlist').html(posthtml + $('#postlist').html());
+}
+
+function PollWorker() {
+    $.ajax({
+        url: 'http://piper.link/api/posts/post/?format=json/',
+        success: function(response) {
+            var updates = response;
+            if (posts === null) {
+                posts = [];
+                for (i = updates['objects'].length - 1; i >= 0; --i) {
+                    RenderPost(updates['objects'][i]);
+                    posts.unshift(updates['objects'][i]);
+                }
+            } else {
+                var recId = posts[0].id;
+                var j;
+                for (j = 0; updates['objects'][j].id != recId && j < updates['objects'].length; ++j);
+                for (k = j - 1; k >= 0; --k) { 
+                    RenderPost(updates['objects'][i]);
+                    posts.unshift(updates['objects'][i]);
+                }
+            }
+        },
+        complete: function() {
+            setTimeout(PollWorker, 2000);
+        }
+    });
+};
+
+PollWorker();
+function LoadSinglePost(postId) {
+    $('#singlepostimage').attr('src', $('#postimage' + postId).attr('src'));
+    $('#singlepostdescription').html($('#posttext' + postId).html());
+    $('#singlepostmodal.ui.modal').modal('show');
 }
 
