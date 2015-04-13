@@ -24,12 +24,30 @@ $(document).ready(function () {
         }
     });
 });
+
+function RenderPost(post) {
+    var posthtml = 
+    "<div class='ui vertical segment'>" +
+        "<div class='content'>";
+    
+    var postimagesplit = post.image.split("/");
+    if (postimagesplit[postimagesplit.length - 1] != "NULL") {
+        posthtml +=
+            "<a href='javascript:void(0);' onclick='LoadSinglePost(" + post['id'] + ");return false;'><img id='postimage" + post['id'] + "' class='ui image center' src='" + post['image'] + "' alt='user image'/></a>";
+    }
+    posthtml +=
+    "<p id='posttext" + post['id'] + "'>" + post['text_content'] + "</p>" +
+    "</div></div>"; 
+
+    $('#postlist').html(posthtml + $('#postlist').html());
+}
+
 function PollWorker() {
     $.ajax({
         url: 'http://piper.link/api/posts/post/?format=json',
         success: function(response) {
             var updates = JSON.parse(response);
-            if (posts === null) {
+            if (posts == null) {
                 posts = [];
                 for (i = updates['objects'].length - 1; i >= 0; --i) {
                     RenderPost(updates['objects'][i]);
@@ -55,20 +73,5 @@ function LoadSinglePost(postId) {
     $('#singlepostimage').attr('src', $('#postimage' + postId).attr('src'));
     $('#singlepostdescription').html($('#posttext' + postId).html());
     $('#singlepostmodal.ui.modal').modal('show');
-}
-function RenderPost(post) {
-    var posthtml = 
-    "<div class='ui vertical segment'>" +
-        "<div class='content'>";
-    var postimagesplit = post.image.split("/");
-    if (postimagesplit[postimagesplit.length - 1] != "NULL") {
-        posthtml +=
-            "<a href='javascript:void(0);' onclick='LoadSinglePost(" + post['id'] + ");return false;'><img id='postimage" + post['id'] + "' class='ui image center' src='" + post['image'] + "' alt='user image'/></a>";
-    }
-    posthtml +=
-    "<p id='posttext" + post['id'] + "'>" + post['text_content'] + "</p>" +
-    "</div></div>"; 
-
-    $('#postlist').html(posthtml + $('#postlist').html());
 }
 

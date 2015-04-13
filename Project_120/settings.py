@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'collectfast',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
+    'registration',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -49,7 +51,9 @@ INSTALLED_APPS = (
     'tastypie_swagger',
 )
 
-
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+SITE_ID = 1
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
