@@ -29,10 +29,7 @@ function RenderPost(post) {
     var posthtml = 
     "<div class='ui vertical segment'>" +
         "<div class='content'>";
-<<<<<<< HEAD
     
-=======
->>>>>>> 0b4c750479583e94c6ebe659e620665a248875d9
     var postimagesplit = post.image.split("/");
     if (postimagesplit[postimagesplit.length - 1] != "NULL") {
         posthtml +=
@@ -47,19 +44,14 @@ function RenderPost(post) {
 
 function PollWorker() {
     $.ajax({
-        url: 'http://piper.link/api/posts/post/?format=json/',
+        url: 'http://piper.link/api/posts/post/?format=json',
         success: function(response) {
-<<<<<<< HEAD
             var updates = JSON.parse(response);
             if (posts == null) {
-=======
-            var updates = response;
-            if (posts === null) {
->>>>>>> 0b4c750479583e94c6ebe659e620665a248875d9
                 posts = [];
                 for (i = updates['objects'].length - 1; i >= 0; --i) {
                     RenderPost(updates['objects'][i]);
-                    posts.unshift(updates['objects'][i]);
+                    posts = updates['objects'][i] + posts;
                 }
             } else {
                 var recId = posts[0].id;
@@ -67,7 +59,7 @@ function PollWorker() {
                 for (j = 0; updates['objects'][j].id != recId && j < updates['objects'].length; ++j);
                 for (k = j - 1; k >= 0; --k) { 
                     RenderPost(updates['objects'][i]);
-                    posts.unshift(updates['objects'][i]);
+                    posts = updates['objects'][i] + posts;
                 }
             }
         },
@@ -76,7 +68,6 @@ function PollWorker() {
         }
     });
 };
-
 PollWorker();
 function LoadSinglePost(postId) {
     $('#singlepostimage').attr('src', $('#postimage' + postId).attr('src'));
