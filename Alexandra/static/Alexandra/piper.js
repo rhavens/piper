@@ -9,6 +9,9 @@ $(document).ready(function () {
     $('#newpostbutton').click(function () {
         $('#newpostmodal').modal('show');
     });
+    $('#authbutton').click(function () {
+        $('#authmodal').modal('show');
+    });
     $('#id_image_styled').click(function () {
         $('#id_image').click();
     });
@@ -29,10 +32,6 @@ function RenderPost(post) {
     var posthtml = 
     "<div class='ui vertical segment'>" +
         "<div class='content'>";
-<<<<<<< HEAD
-    
-=======
->>>>>>> 0b4c750479583e94c6ebe659e620665a248875d9
     var postimagesplit = post.image.split("/");
     if (postimagesplit[postimagesplit.length - 1] != "NULL") {
         posthtml +=
@@ -49,13 +48,8 @@ function PollWorker() {
     $.ajax({
         url: 'http://piper.link/api/posts/post/?format=json/',
         success: function(response) {
-<<<<<<< HEAD
-            var updates = JSON.parse(response);
-            if (posts == null) {
-=======
             var updates = response;
             if (posts === null) {
->>>>>>> 0b4c750479583e94c6ebe659e620665a248875d9
                 posts = [];
                 for (i = updates['objects'].length - 1; i >= 0; --i) {
                     RenderPost(updates['objects'][i]);

@@ -17,7 +17,11 @@
         <div class="one wide row"></div>
         <div class="one wide row"></div>
         <h1 class="ui center aligned header title-text">
-            {{ header_text }}
+            {% if user.username %}
+                {{ user.username }}'s Piper
+            {% else %}
+                Piper
+            {% endif %}
         </h1>
     </div>
     <div class="ui visible inverted labeled icon top sidebar menu navbar-elem">
@@ -28,6 +32,15 @@
         <a id="newpostbutton" class="item">
             <i class="comment outline icon"></i>
             New Post
+        </a>
+        <a id="authbutton" class="item">
+            {% if user.is_authenticated %}
+                <i class="sign out icon"></i>
+                Sign Out
+            {% else %}
+                <i class="sign in icon"></i>
+                Sign In
+            {% endif %}
         </a>
     </div>
 
@@ -174,6 +187,56 @@
                 Submit
             </div>
         </div>
+    </div>
+
+    <div id="authmodal" class="ui modal">
+        <i class="close icon"></i>
+<!-- Authenticated User -->
+        {% if user.is_authenticated %}
+        <div class="header">
+            Logout
+        </div>
+        <div class="content">
+            <div class="ui form segment">
+                Are you sure you want to log out?
+            </div>
+        </div>
+        <div class="actions">
+            <a href="{% url 'auth_logout' %}" class="ui positive right labeled button">Log out</a>
+        </div>
+<!-- Non-Authenticated User -->
+        {% else %}
+        <div class="header">
+            Sign In or Register
+        </div>
+        <div class="ui two column middle aligned relaxed fitted stackable grid" style="position:relative;">
+        <div class="column">
+            <h3>Sign In</h3>
+            <div class="content">
+                <div class="ui form segment">
+                    <form method="post" action="{% url 'registration_register' %}">
+                        {% csrf_token %}
+                        {{ r_form.as_p }}
+                        <input type="submit" value="Submit" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="ui vertical divider">OR</div>
+        <div class="column">
+            <h3>Register</h3>
+            <div class="content">
+                <div class="ui form segment">
+                    <form method="post" action="{% url 'registration_register' %}">
+                        {% csrf_token %}
+                        {{ l_form.as_p }}
+                        <input type="submit" value="Submit" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+        {% endif %}
     </div>
 
     <div id="singlepostmodal" class="ui basic long modal">

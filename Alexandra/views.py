@@ -10,6 +10,7 @@ from .models import Post
 from .models import PostForm
 from django.core.cache import cache
 import cPickle as pickle
+import registration
 
 
 # from .models import Document
@@ -24,10 +25,11 @@ def index(request):
 
 def posts(request):
     latest_posts = Post.objects.order_by('-created_at')[:10]
-    header_text = "Piper"
-    if request.user.is_authenticated():
-        header_text = request.user.username + "'s Piper"
-    context = {'latest_posts' : latest_posts, 'form':PostForm(), 'user' : request.user, 'header_text' : header_text}
+    context = {'latest_posts':latest_posts,
+                'form':PostForm(), 
+                'user':request.user,
+                'r_form':registration.forms.RegistrationForm,
+                'l_form':registration.forms.RegistrationForm}
 
     return render(request, 'Alexandra/index.html', context)
 
@@ -67,5 +69,3 @@ def set_cache(request):
       cache.set('latest_view', cPickle.dump(context, 60*15))
 
     return HttpResponse(message)
-
-# Create your views here.
