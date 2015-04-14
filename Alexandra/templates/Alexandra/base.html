@@ -1,0 +1,43 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Piper</title>
+    <meta name="description" content="the social network">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="{% static 'Alexandra/Semantic/semantic.min2.css' %}">
+    <link rel="stylesheet" href="{% static 'Alexandra/piper.css' %}"/>
+</head>
+
+<body>
+    <div id="header">
+    {% block header %}
+    <a href="{% url 'posts' %}">Home</a> | 
+
+    {% if user.is_authenticated %}
+        Logged In: {{ user.username }} 
+        (<a href="{% url 'auth_logout' %}">Log out</a> | 
+        <a href="{% url 'auth_password_change' %}">Change Password </a>)
+    {% else %}
+       <a href="{% url 'auth_login' %}">Login</a>
+    {% endif %}
+    <hr />
+    {% endblock %}
+    </div>
+
+    <div id="content">
+    {% block content %}{% endblock %}
+    </div>
+
+    <div id="footer">
+    {% block footer %}
+        <hr />
+    {% endblock %}
+    </div>
+</body>
+
