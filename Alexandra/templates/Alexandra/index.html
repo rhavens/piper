@@ -183,9 +183,13 @@
  
         </div>
         <div class="actions">
+            {% if user.is_authenticated %}
             <div id="new_post_submit_styled" class="ui positive right labeled button">
                 Submit
             </div>
+            {% else %}
+            <p>You must log in to make a post.</p>
+            {% endif %}
         </div>
     </div>
 
@@ -194,7 +198,7 @@
 <!-- Authenticated User -->
         {% if user.is_authenticated %}
         <div class="header">
-            Logout
+            Log Out
         </div>
         <div class="content">
             <div class="ui form segment">
@@ -207,7 +211,7 @@
 <!-- Non-Authenticated User -->
         {% else %}
         <div class="header">
-            Sign In or Register
+            Sign in or Register
         </div>
         <div class="ui two column middle aligned relaxed fitted stackable grid" style="position:relative;">
         <div class="column">
