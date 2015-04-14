@@ -10,7 +10,8 @@ from .models import Post
 from .models import PostForm
 from django.core.cache import cache
 import cPickle as pickle
-import registration
+from registration.forms import RegistrationForm
+from django.contrib.auth.forms import AuthenticationForm
 
 
 # from .models import Document
@@ -28,8 +29,8 @@ def posts(request):
     context = {'latest_posts':latest_posts,
                 'form':PostForm(), 
                 'user':request.user,
-                'r_form':registration.forms.RegistrationForm,
-                'l_form':registration.forms.RegistrationForm}
+                'r_form':RegistrationForm,
+                'l_form':AuthenticationForm}
 
     return render(request, 'Alexandra/index.html', context)
 

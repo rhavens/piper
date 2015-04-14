@@ -215,12 +215,12 @@
         </div>
         <div class="ui two column middle aligned relaxed fitted stackable grid" style="position:relative;">
         <div class="column">
-            <h3>Sign In</h3>
+            <div class="ui center aligned header">Sign In</div>
             <div class="content">
                 <div class="ui form segment">
-                    <form method="post" action="{% url 'registration_register' %}">
+                    <form method="post" action="{% url 'auth_login' %}">
                         {% csrf_token %}
-                        {{ r_form.as_p }}
+                        {{ l_form.as_p }}
                         <input type="submit" value="Submit" />
                     </form>
                 </div>
@@ -228,12 +228,12 @@
         </div>
         <div class="ui vertical divider">OR</div>
         <div class="column">
-            <h3>Register</h3>
+            <div class="ui center aligned header">Sign In</div>
             <div class="content">
                 <div class="ui form segment">
                     <form method="post" action="{% url 'registration_register' %}">
                         {% csrf_token %}
-                        {{ l_form.as_p }}
+                        {{ r_form.as_p }}
                         <input type="submit" value="Submit" />
                     </form>
                 </div>
