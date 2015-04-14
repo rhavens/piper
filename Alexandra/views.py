@@ -8,6 +8,7 @@ from django.template import RequestContext
 #from .models import User 
 from .models import Post
 from .models import PostForm
+from .models import User_post
 from django.core.cache import cache
 import cPickle as pickle
 from registration.forms import RegistrationForm
@@ -49,6 +50,8 @@ def new_post(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save(commit=True)
+            user_post = User_post(post = form.id, user = request.user.id)
+            user_post.save(commit=True)
             return posts(request)
         else:
             print form.errors

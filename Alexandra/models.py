@@ -4,28 +4,29 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import widgets
 import datetime
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 
-class User(models.Model):
-    id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length = 20)
-    password = models.CharField(max_length = 20)
-    email = models.CharField(max_length = 254)
+#class User(models.Model):
+#    id = models.AutoField(primary_key=True)
+#    username = models.CharField(max_length = 20)
+#    password = models.CharField(max_length = 20)
+#    email = models.CharField(max_length = 254)
 #    birthday = models.IntegerField(8)
-    GENDER_REGISTRATION = (
-      ('M', 'Male'),
-      ('F', 'Female'),
-      ('O', 'Other'),
-    )
-    gender = models.CharField(max_length = 1, choices = GENDER_REGISTRATION, default = 'O')
-    created_at = models.DateTimeField(editable=False, default=timezone.now)
-    last_modified = models.DateTimeField(default=timezone.now)
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.created_at = datetime.datetime.today()
-        self.last_modified = datetime.datetime.today()
-        return super(User, self).save(*args, **kwargs)
+#    GENDER_REGISTRATION = (
+#      ('M', 'Male'),
+#      ('F', 'Female'),
+#      ('O', 'Other'),
+#    )
+#    gender = models.CharField(max_length = 1, choices = GENDER_REGISTRATION, default = 'O')
+#    created_at = models.DateTimeField(editable=False, default=timezone.now)
+#    last_modified = models.DateTimeField(default=timezone.now)
+#    def save(self, *args, **kwargs):
+#        if not self.id:
+#            self.created_at = datetime.datetime.today()
+#        self.last_modified = datetime.datetime.today()
+#        return super(User, self).save(*args, **kwargs)
 
    
 
@@ -69,9 +70,9 @@ class PostForm (ModelForm):
 #    content = models.CharField(max_length = 1024)
 #    timestamp = models.DateTimeField('Posted: ')
     
-#class User_post(models.Model):
-#    user = models.ForeignKey(User)
-#    post = models.ForeignKey(Post)
+class User_post(models.Model):
+    user = models.ForeignKey(User)
+    post = models.ForeignKey(Post)
     
 #class Posts_comments (models.Model):
 #    post = models.ForeignKey(Post)
