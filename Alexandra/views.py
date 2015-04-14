@@ -23,10 +23,9 @@ def index(request):
 
 def posts(request):
     latest_posts = Post.objects.order_by('-created_at')[:10]
+    header_text = "Piper"
     if (request.user) {
         header_text = request.user.username + "'s Piper"
-    } else {
-        header_text = "Piper"
     }
     context = {'latest_posts' : latest_posts, 'form':PostForm(), 'user' : request.user, 'header_text' : header_text}
 
