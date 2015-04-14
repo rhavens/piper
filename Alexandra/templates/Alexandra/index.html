@@ -213,33 +213,37 @@
         <div class="header">
             Sign in or Register
         </div>
+        <br/>
+        <br/>
         <div class="ui two column middle aligned relaxed fitted stackable grid" style="position:relative;">
-        <div class="column">
-            <div class="ui center aligned header">Sign In</div>
-            <div class="content">
-                <div class="ui form segment">
-                    <form method="post" action="{% url 'auth_login' %}">
-                        {% csrf_token %}
-                        {{ l_form.as_p }}
-                        <input type="submit" value="Submit" />
-                    </form>
+            <div class="column">
+                <div class="ui center aligned header">Sign In</div>
+                <div class="content">
+                    <div class="ui form segment">
+                        <form method="post" action="{% url 'auth_login' %}">
+                            {% csrf_token %}
+                            {{ l_form.as_p }}
+                            <input type="submit" value="Submit" />
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="ui vertical divider">OR</div>
-        <div class="column">
-            <div class="ui center aligned header">Sign In</div>
-            <div class="content">
-                <div class="ui form segment">
-                    <form method="post" action="{% url 'registration_register' %}">
-                        {% csrf_token %}
-                        {{ r_form.as_p }}
-                        <input type="submit" value="Submit" />
-                    </form>
+            <div class="ui vertical divider">OR</div>
+            <div class="column">
+                <div class="ui center aligned header">Register</div>
+                <div class="content">
+                    <div class="ui form segment">
+                        <form method="post" action="{% url 'registration_register' %}">
+                            {% csrf_token %}
+                            {{ r_form.as_p }}
+                            <input type="submit" value="Submit" />
+                        </form>
+                    </div>
                 </div>
             </div>
+            <br/>
         </div>
-        </div>
+        <br/>
         {% endif %}
     </div>
 
