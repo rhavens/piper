@@ -28,14 +28,14 @@ def index(request):
 
 def posts(request):
     latest_posts = Post.objects.order_by('-created_at')[:10]
-    user_posts = map(lambda x:{'text_content':x.text_content,
-                                  'image':x.image,
-                                  'id':x.id,
-                                  'username':User.objects.get(
-                                      id=(User_post.objects.get(post=x.id).user)).username},
-                            latest_posts)
+#    user_posts = map(lambda x:{'text_content':x.text_content,
+#                                  'image':x.image,
+#                                  'id':x.id,
+#                                  'username':User.objects.get(
+#                                      id=(User_post.objects.get(post=x.id).user)).username},
+#                            latest_posts)
 
-    context = {'latest_posts':user_posts,
+    context = {'latest_posts':latest_posts,
                 'form':PostForm(), 
                 'user':request.user,
                 'r_form':RegistrationForm,
