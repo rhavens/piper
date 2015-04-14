@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response
+from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.core import serializers
 from django import forms
@@ -39,6 +40,8 @@ def post(request, post_id):
 
 
 def new_post(request):
+    if not request.user.is_authenticated():
+        return redirect('../accounts/login')
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
