@@ -1,23 +1,30 @@
-{% load i18n %}
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <link rel="stylesheet"href="{{ STATIC_URL }}style.css" />
-    <title>{% block title %}User test{% endblock %}</title>
+    <meta charset="utf-8">
+    <title>Piper</title>
+    <meta name="description" content="the social network">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="{% static 'Alexandra/Semantic/semantic.min2.css' %}">
+    <link rel="stylesheet" href="{% static 'Alexandra/piper.css' %}"/>
 </head>
 
 <body>
     <div id="header">
     {% block header %}
-    <a href="{% url 'new_post' %}">{% trans "Home" %}</a> | 
+    <a href="{% url 'posts' %}">Home</a> | 
 
     {% if user.is_authenticated %}
-        {% trans "Logged in" %}: {{ user.username }} 
-        (<a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a> | 
-        <a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a>)
+        Logged In: {{ user.username }} 
+        (<a href="{% url 'auth_logout' %}">Log out</a> | 
+        <a href="{% url 'auth_password_change' %}">Change Password </a>)
     {% else %}
-       <a href="{% url 'auth_login' %}">{% trans "Log in" %}</a>
+       <a href="{% url 'auth_login' %}">Login</a>
     {% endif %}
     <hr />
     {% endblock %}

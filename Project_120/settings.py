@@ -50,16 +50,27 @@ INSTALLED_APPS = (
     'tastypie',
     'tastypie_swagger',
 )
-
+SEND_ACTIVATION_EMAIL = False
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 SITE_ID = 1
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'piperplatform@gmail.com'
+EMAIL_HOST_PASSWORD = 'adminteam5'
+EMAIL_PORT = 587
+
+DEFAULT_FROM_EMAIL = 'piperplatform@gmail.com'
+
+
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
