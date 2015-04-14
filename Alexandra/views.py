@@ -58,7 +58,7 @@ def new_post(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             user_post = User_post(post = form.save(commit=True), user = request.user)
-            user_post.save(commit=True)
+            user_post.save()
             return posts(request)
         else:
             print form.errors
