@@ -63,6 +63,8 @@ EMAIL_PORT = 587
 
 DEFAULT_FROM_EMAIL = 'piperplatform@gmail.com'
 
+LOGIN_REDIRECT_URL = '/'
+
 
 
 MIDDLEWARE_CLASSES = (
@@ -70,7 +72,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.middleware.csrf.CsrfResponseMiddleware',
+#    'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
