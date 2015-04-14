@@ -206,7 +206,10 @@
             </div>
         </div>
         <div class="actions">
-            <a href="{% url 'auth_logout' %}" class="ui positive right labeled button">Log out</a>
+            <form method="post" action="{% url 'auth_logout' %}?next={% url 'posts' %}">
+                {% csrf_token %}
+                <input type="submit" value="Log Out" class="ui positive right labeled button" />
+            </form>
         </div>
 <!-- Non-Authenticated User -->
         {% else %}
@@ -214,7 +217,7 @@
             Sign in or Register
         </div>
         <br/>
-        <br/>
+        <br/>   
         <div class="ui two column middle aligned relaxed fitted stackable grid" style="position:relative;">
             <div class="column">
                 <div class="ui center aligned header">Sign In</div>
