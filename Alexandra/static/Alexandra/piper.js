@@ -60,8 +60,10 @@ function PollWorker() {
                 var j;
                 for (j = 0; updates['objects'][j].id != recId && j < updates['objects'].length; ++j);
                 for (k = j - 1; k >= 0; --k) { 
-                    RenderPost(updates['objects'][i]);
-                    posts.unshift(updates['objects'][i]);
+                    if (updates['objects'][i].image) {
+                        RenderPost(updates['objects'][i]);
+                        posts.unshift(updates['objects'][i]);
+                    }
                 }
             }
         },
