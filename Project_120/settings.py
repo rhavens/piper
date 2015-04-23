@@ -15,12 +15,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 
+KEYS = []
+with open('/home/ubuntu/keys') as f:
+	for line in f:
+		KEYS.append(line.strip())
+PIPER_SECRET_KEY = KEYS[0]
+PIPER_DB_PASSWORD = KEYS[1]
+PIPER_AWS_ACCESS_ID = KEYS[2]
+PIPER_AWS_SECRET_KEY = KEYS[3]
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v2sx78nzy-zrjhxgy_stu&jz884fw2bop7if_v6yu+_m7^l8v2'
+SECRET_KEY = PIPER_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -89,37 +98,38 @@ WSGI_APPLICATION = 'Project_120.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'piperdb',
-        'USER': 'piperadmin',
-        'PASSWORD': 'adminpassword',
-        'HOST': 'piperdbinstance.cop4dkmckeiy.us-east-1.rds.amazonaws.com',
+        'NAME': 'PiperPostgres',
+        'USER': 'PiperDBA',
+        'PASSWORD': PIPER_DB_PASSWORD,
+        'HOST': 'piperpostgres.cdymv9jcwauf.us-west-2.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
 
-CACHES = {
-    'default': {
-        'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': 'localhost:3000',
-        'OPTIONS': {
-            'DB': 1,
-            'PARSER_CLASS': 'redis.connection.HiredisParser',
-            'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
-            'CONNECTION_POOL_CLASS_KWARGS': {
-                'max_connections': 50,
-                'timeout': 20,
-            }
-        },
-    },
-}
+#CACHES = {
+#    'default': {
+#        'BACKEND': 'redis_cache.RedisCache',
+#        'LOCATION': 'localhost:3000',
+#        'OPTIONS': {
+#            'DB': 1,
+#            'PARSER_CLASS': 'redis.connection.HiredisParser',
+#            'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
+#            'CONNECTION_POOL_CLASS_KWARGS': {
+#                'max_connections': 50,
+#                'timeout': 20,
+#            }
+#        },
+#    },
+#}
 
 
 
-SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
-SESSION_CACHE_ALIAS = "default"
+#SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+#SESSION_CACHE_ALIAS = "default"
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -133,9 +143,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-AWS_STORAGE_BUCKET_NAME = 'piperstatic'
-AWS_ACCESS_KEY_ID = 'AKIAJ5G3P56SBQ5CDIAQ'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'pipers3bucket'
+AWS_ACCESS_KEY_ID = PIPER_AWS_ACCESS_ID
+AWS_SECRET_ACCESS_KEY = PIPER_AWS_SECRET_KEY
 
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
@@ -155,3 +165,4 @@ MEDIA_ROOT = '/var/media/'
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+

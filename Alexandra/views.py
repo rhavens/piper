@@ -9,8 +9,8 @@ from django.template import RequestContext
 from .models import Post
 from .models import PostForm
 from .models import User_post
-from django.core.cache import cache
-import cPickle as pickle
+#from django.core.cache import cache
+#import cPickle as pickle
 from registration.forms import RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
@@ -67,16 +67,16 @@ def new_post(request):
     return render(request, 'Alexandra/new_post.html', {'form': form})
 #
 
-def set_cache(request):
-
-    latest_view = Post.objects.order_by('-created_at')[:10]
-    context = {'latest_posts' : latest_view, 'form':PostForm()}
-
-    in_cache = cache.get('latest_view')
-
-    if in_cache:
-      return render(request, 'Alexandra/index.html', in_cache)
-    else:
-      cache.set('latest_view', cPickle.dump(context, 60*15))
-
-    return HttpResponse(message)
+#def set_cache(request):
+#
+#    latest_view = Post.objects.order_by('-created_at')[:10]
+#    context = {'latest_posts' : latest_view, 'form':PostForm()}
+#
+#    in_cache = cache.get('latest_view')
+#
+#    if in_cache:
+#      return render(request, 'Alexandra/index.html', in_cache)
+#    else:
+#      cache.set('latest_view', cPickle.dump(context, 60*15))
+#
+#    return HttpResponse(message)
