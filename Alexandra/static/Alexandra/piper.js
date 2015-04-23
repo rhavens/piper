@@ -60,7 +60,7 @@ function PollWorker() {
                 var j;
                 for (j = 0; updates['objects'][j].id != recId && j < updates['objects'].length; ++j);
                 for (k = j - 1; k >= 0; --k) { 
-                    if (updates['objects'][i].image) {
+                    if (updates['objects'][i]) {
                         RenderPost(updates['objects'][i]);
                         posts.unshift(updates['objects'][i]);
                     }
