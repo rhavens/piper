@@ -46,7 +46,7 @@ function RenderPost(post) {
 
 function PollWorker() {
     $.ajax({
-        url: 'http://piper.link/api/posts/post/?format=json/',
+        url: 'http://piper.link/api/posts/post/?format=json&ref=' + Math.floor((Math.random() * 10000000)) +'/',
         success: function(response) {
             var updates = response;
             if (posts === null) {
