@@ -16,7 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 
 KEYS = []
-with open('/home/ubuntu/keys') as f:
+with open('/etc/piperkeys') as f:
 	for line in f:
 		KEYS.append(line.strip())
 PIPER_SECRET_KEY = KEYS[0]
