@@ -59,13 +59,13 @@ def new_post(request):
         if form.is_valid():
             user_post = User_post(post = form.save(commit=True), user = request.user)
             user_post.save()
-            return posts(request)
+            return redirect('../')
         else:
             print form.errors
     else:
          form = PostForm()
-    return render(request, 'Alexandra/new_post.html', {'form': form})
-#
+    return redirect('../')
+
 
 #def set_cache(request):
 #
