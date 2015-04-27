@@ -1,0 +1,31 @@
+#content{
+	border:1px solid #A9F5A9;
+	background:#FFF;
+	width: 300px;
+	height: 300px;
+	overflow:auto;
+	-moz-border-radius:3px;
+
+}
+button{
+	border:none;
+	padding:6px;
+	text-decoration:none;
+	background: #2EFE64;
+	color:white;
+	-moz-border-radius:4px;
+
+}
+
+#content p{
+	padding:1em;
+	margin:1em;
+	background:#E6E6E6;
+	border:1px solid #BDBDBD;
+	-moz-border-radius:4px;
+}
+
+#message button{margin: 1em 0 0 0;}
+
+#message textarea {border:1px solid #A9F5A9; font-family: Tahoma, sans-serif;}
+
