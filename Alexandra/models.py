@@ -28,7 +28,9 @@ from django.contrib.auth.models import User
 #        self.last_modified = datetime.datetime.today()
 #        return super(User, self).save(*args, **kwargs)
 
-   
+class Comments(models.Model):
+    text = models.CharField(max_length=225) 
+    #commenter = models.ForeignKey(User) 
 
 class Post (models.Model):
     id = models.AutoField(primary_key=True)
@@ -64,6 +66,7 @@ class PostForm (ModelForm):
             'image': FileInput(),
         }
 
+
 #class Comment (models.Model):
 #    id = models.AutoField(primary_key=True)
 #    username = models.CharField(max_length = 60)
@@ -71,7 +74,7 @@ class PostForm (ModelForm):
 #    timestamp = models.DateTimeField('Posted: ')
     
 class User_post(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, default = 1)
     post = models.ForeignKey(Post)
     
 #class Posts_comments (models.Model):

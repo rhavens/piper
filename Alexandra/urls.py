@@ -12,6 +12,7 @@ user_resource = UserResource()
 urlpatterns = patterns ( '',
 # url(r'^$', views.posts, name = 'index' ),
 url(r'^$', views.posts, name = 'posts'),
+url(r'^node_api$', views.node_api, name='node_api'),
 url(r'^post/(?P<post_id>\d+)', views.post, name = 'post'),
 url(r'^new_post/', views.new_post, name = 'new_post'),
 url(r'^api/posts/', include(post_resource.urls)),
