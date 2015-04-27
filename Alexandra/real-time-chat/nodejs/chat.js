@@ -9,7 +9,7 @@ var querystring = require('querystring');
  
 var redis = require('socket.io/node_modules/redis');
 var sub = redis.createClient();
- 
+console.log("hello world")
 sub.subscribe('chat');
 
 function handler(req, res){
@@ -25,29 +25,35 @@ function handler(req, res){
         });
 }
 
+// 
+// io.configure(function(){
+    // io.set('authorization', function(data, accept){
+        // if(data.headers.cookie){
+            // data.cookie = cookie_reader.parse(data.headers.cookie);
+            // return accept(null, true);
+        // }
+        // return accept('error', false);
 
-io.configure(function(){
-    io.set('authorization', function(data, accept){
-        if(data.headers.cookie){
-            data.cookie = cookie_reader.parse(data.headers.cookie);
-            return accept(null, true);
-        }
-        return accept('error', false);
+    // });
+    // io.set('log level', 1);
 
-    });
-    io.set('log level', 1);
-
-});
+// });
 
  
  
-io.sockets.on('connection', function (socket) {
-  
+io.on('connection', function (socket) {
+
+    console.log("in io connection")
+
+  socket.emit('news', {hello:'world'});
+
   sub.on('message', function(channel, message){
+    console.log("do we get into message?");
     socket.send(message);
   });
 
   socket.on('send_message', function(message){
+    console.log("success")
     values = querystring.stringify({
         comment: message,
         sessionid: socket.handshake.cookie['sessionid'],
@@ -56,8 +62,8 @@ io.sockets.on('connection', function (socket) {
     var options = {
         host: 'localhost',
         port: 8000,
-        path: '/node_api'
-        method: 'POST'
+        path: '/node_api',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Content-Length': values.length

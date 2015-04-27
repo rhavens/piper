@@ -317,10 +317,9 @@
     
         $(document).ready(function(){
             
-            var socket = io('http://localhost:8001');
+            var socket = io.connect('//localhost:8001');
       
             socket.on('connect', function(){
-                client.send("hey we connected!!");
                 console.log("connect");
             });
       
@@ -339,7 +338,6 @@
                      
             entry_el.keypress(function(event){
                 console.log("do i get here?");
-        //When enter is pressed send input value to node server
                 if(event.keyCode != 13) return;
                 else{
                     var msg = entry_el.attr('value');
