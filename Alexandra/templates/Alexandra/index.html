@@ -326,7 +326,7 @@
             var entry_el = $('#comment');
                
             socket.on('message', function(message) {
-                console.log("do i get into the socket function?")
+                
                 var data = message.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
         
                 $('#comments').append('<li>' + data + '</li>');
@@ -344,7 +344,12 @@
                     socket.emit('send_message', { message: msg, username: "{{user.username}}", id: {{user.id}}}, function(data){
                          console.log(data);
                     });
+                    console.log(entry_el.val());
+                   
+                    
                 }
+                 $('#comment').val("");
+
             });
         });
 
