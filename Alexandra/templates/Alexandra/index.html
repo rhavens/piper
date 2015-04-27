@@ -43,10 +43,12 @@
                 Sign In
             {% endif %}
         </a>
+        {% if user.is_authenticated %}
         <a id="togglechat" class="item" onclick="toggleSidebar()">
           <i class="content icon"></i>
           <span class="text">Chatbox</span>
         </a>
+        {% endif %}
     </div>
 
     <div class="ui center aligned grid site-bg">
@@ -353,6 +355,7 @@
 
             socket.on('connect', function(){
                 console.log("connect");
+                $('#comment').attr('placeholder', 'Chat here!');
             });
       
             var entry_el = $('#comment');
@@ -388,7 +391,7 @@
             <p>{{comment.text}}</p>
         {% endfor %}
     </div>
-    <input class="item" id="comment" name="chatbox" type="text" placeholder="Chat here!">
+    <input class="item" id="comment" name="chatbox" type="text" placeholder="Loading chat...">
   </div>
   <script type="text/javascript">
         function toggleSidebar() {
