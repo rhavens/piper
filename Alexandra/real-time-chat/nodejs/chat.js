@@ -4,7 +4,11 @@ var io = require('socket.io')(app);
 var fs = require('fs');
 var cookieParser = require('cookie-parser')(app);
 
-app.listen(8001);
+app.listen(8001, '127.0.0.1');
+app.on('error', function(e){
+	console.log("Error: " + e.message);
+	console.log(e.stack);
+});
 
 var querystring = require('querystring');
  
@@ -81,7 +85,7 @@ io.on('connection', function (socket) {
 
     socket.on('send_message', function(data){
         console.log("success")
-        console.log("request.user")
+        console.log(data.username)
         values = querystring.stringify({
             username: data.username,
             id: data.id,
@@ -90,8 +94,8 @@ io.on('connection', function (socket) {
         });
 
         var options = {
-            host: 'localhost',
-            port: 8000,
+            host: 'piper.link',
+            port: 80,
             path: '/node_api',
             method: 'POST',
             headers: {
