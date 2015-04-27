@@ -39,7 +39,7 @@ def posts(request):
 #                                      id=(User_post.objects.get(post=x.id).user)).username},
 #                            latest_posts)
     
-    comments = Comments.objects.select_related().all()[0:100]
+    comments = Comments.objects.order_by('-created_at')[:10].reverse()
     context = {'latest_posts':latest_posts,
                 'form':PostForm(),
                 'comments': comments, 
@@ -82,12 +82,17 @@ def node_api(request):
         #user = User.objects.get(id=user_id)
  
         #Create comment
-        Comments.objects.create('PizzaBob', text=request.POST.get('comment'))
+        username = request.POST.get("username")
+        comment = request.POST.get("comment")
+        print(request.POST.get("id"))
+        print(username)
+        print(comment)
+        Comments.objects.create(text=username + ": " + comment)
         
         #Once comment has been created post it to the chat channel
         r = redis.StrictRedis(host='localhost', port=6379, db=0)
-        r.publish('chat', 'key1' + ': ' + request.POST.get('comment'))
-        
+        r.publish('chat', username + ': ' + comment)
+
         return HttpResponse("Everything worked :)")
     except Exception, e:
         return HttpResponseServerError(str(e))

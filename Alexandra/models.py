@@ -29,7 +29,8 @@ from django.contrib.auth.models import User
 #        return super(User, self).save(*args, **kwargs)
 
 class Comments(models.Model):
-    text = models.CharField(max_length=225) 
+    text = models.CharField(max_length=225)
+    created_at = models.DateTimeField(editable=False, default=timezone.now)
     #commenter = models.ForeignKey(User) 
 
 class Post (models.Model):

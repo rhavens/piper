@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html manifest="{% static 'Alexandra/piper.appcache' %}">
+<html>
 <head>
     <title>Piper</title>
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -316,7 +316,7 @@
     <script>
     
         $(document).ready(function(){
-            
+
             var socket = io.connect('//localhost:8001');
       
             socket.on('connect', function(){
@@ -330,26 +330,20 @@
                 var data = message.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
         
                 $('#comments').append('<li>' + data + '</li>');
-                window.scrollBy(0, 10000000000);
                 entry_el.focus();
             });
 
             console.log("hi first test");
                      
             entry_el.keypress(function(event){
-                console.log("do i get here?");
+                console.log("typingggg")
                 if(event.keyCode != 13) return;
-                else{
-                    var msg = entry_el.attr('value');
-                    console.log(msg);          
-                    if(msg){
-                        socket.emit('send_message', msg, function(data){
-                        console.log(data);
+                console.log("sendingggg")
+                var msg = entry_el.val();
+                if(msg){
+                    socket.emit('send_message', { message: msg, username: "{{user.username}}", id: {{user.id}}}, function(data){
+                         console.log(data);
                     });
-        
-                //Clear input value   
-                    entry_el.attr('value', '');
-                    }
                 }
             });
         });
