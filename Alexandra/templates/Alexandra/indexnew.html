@@ -2,33 +2,411 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Alexandra's Social Network</title>
-    <link rel='stylesheet' type='text/css' href="{% static 'Alexandra/jquery.fullPage.css' %}"/>
+    {% if not l_form %}
+        <meta http-equiv="refresh" content="0; url=http://piper.link/" />
+    {% endif %}
+    <title>Piper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="the social network">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="{% static 'Alexandra/Semantic/semantic.min2.css' %}">
+    <link rel="stylesheet" href="{% static 'Alexandra/piper.css' %}">
 </head>
 
-<body>
-    <div id='fullpage'>
-        <div class='section' id='section0'>
-            {% if latest_posts %}
-            {% for post in latest_posts %}
-            <div class='slide'>
-                <h1>{{post.text_content}}</h1>
-            </div>
-            {% endfor %}
+<body class="pushable">
+    <div class="pusher">
+    <div class="ui grid">
+        <div class="one wide row"></div>
+        <div class="one wide row"></div>
+        <h1 class="ui center aligned header title-text">
+            {% if user.username %}
+                {{ user.username }}'s Piper
             {% else %}
-            <p>No posts available</p>
+                Piper
+            {% endif %}
+        </h1>
+    </div>
+    <div class="ui visible inverted labeled icon top sidebar menu navbar-elem">
+        <a href="http://piper.link" class="item">
+            <i class="home icon"></i>
+            Home
+        </a>
+        <a id="newpostbutton" class="item">
+            <i class="comment outline icon"></i>
+            New Note
+        </a>
+        <a id="authbutton" class="item">
+            {% if user.is_authenticated %}
+                <i class="sign out icon"></i>
+                Sign Out
+            {% else %}
+                <i class="sign in icon"></i>
+                Sign In
+            {% endif %}
+        </a>
+        {% if user.is_authenticated %}
+        <a id="togglechat" class="item" onclick="toggleSidebar()">
+          <i class="comments outline icon"></i>
+          <span class="text">Freestyle</span>
+        </a>
+        {% endif %}
+    </div>
+
+    <div class="ui center aligned grid site-bg">
+        <!--
+        <div class="two wide column"></div>
+        <div class="three wide column">
+            <div class="ui card">
+                <div class="image">
+                    <img src="" alt="profile picture"/>
+                </div>
+                <div class="content">
+                    <a class="header">Name</a>
+                    <div class="description">
+                        Some status
+                    </div>
+                    <div class="extra content">
+                        <div class="ui feed">
+                            <div class="event">
+                                <div class="label">
+                                    <img src="" alt="thumbnail"/>
+                                </div>
+                                <div class="content">
+                                    <div class="summary">
+                                        <a href="#" class="user">
+                                            Some user
+                                        </a> did something
+                                    </div>
+                                </div>
+                            </div>
+ 
+                            <div class="event">
+                                <div class="label">
+                                    <img src="" alt="thumbnail"/>
+                                </div>
+                                <div class="content">
+                                    <div class="summary">
+                                        <a href="#" class="user">
+                                            Some user
+                                        </a> did something
+                                    </div>
+                                </div>
+                            </div>
+ 
+                            <div class="event">
+                                <div class="label">
+                                    <img src="" alt="thumbnail"/>
+                                </div>
+                                <div class="content">
+                                    <div class="summary">
+                                        <a href="#" class="user">
+                                            Some user
+                                        </a> did something
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+
+        <!-- Vertical scrolling -->
+        <div id="postsscroll" class="ten wide column">
+            <div id="postlist" class="ui segment">
+<!--{% for post in latest_posts %}
+            <div class="ui vertical segment">
+                <div class="content">
+{% if post.image %}
+                    <a href="javascript:void(0);" onclick="LoadSinglePost({{post.id}});return false;"><img id="postimage{{post.id}}" class="ui image center" src='{{ post.image.url }}' alt='user image'/></a>
+{% endif %}
+                    <p id="posttext{{post.id}}">{{post.text_content}}</p>
+                    <div class="left aligned column">
+                    <div class="ui comments">
+                        <h3 class="ui dividing header">Comments</h3>
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="">
+                            </a>
+                            <div class="content">
+                                <a class="author">User1</a>
+                                <div class="metadata">
+                                    <span class="date">Today at 5:42PM</span>
+                                </div>
+                                <div class="text">
+                                    the comment.
+                                </div>
+                            </div>
+                        </div>
+                        <form class="ui reply form">
+                            <div class="field">
+                                <input type="text"></input>
+                            </div>
+                            <div class="ui blue labeled submit icon button">
+                                <i class="icon edit"></i>Comment
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </div>
+{% endfor %}-->
+            </div>
+        </div>
+        <!-- /Vertical scrolling -->
+
+
+        <!--<div class="three wide column"></div>-->
+    </div>
+
+
+
+    <!--========================================->
+        MODALS
+            POST MODAL
+            AUTH MODAL
+            SINGLE POST MODAL
+    <==========================================-->
+
+    <div id="newpostmodal" class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            New Note
+        </div>
+        <div class="content">
+            <div class="ui form segment">
+            <form id='new_post_form' method='post' enctype= "multipart/form-data" action='/new_post/'>
+            {% csrf_token %}
+            <div class="field">
+                <label>
+                Image
+                </label>
+                <input id="id_image" name="image" type="file" />
+                <div id="id_image_styled" class="ui submit button">
+                <div>Upload an image</div>
+                </div>
+            </div>
+            <div class="field">
+                <label>
+                Description
+                </label>
+                <textarea cols="50" id="id_text_content" maxlength="200" name="text_content" rows="5"></textarea>
+            </div>
+            <br/>
+            <input id="new_post_submit" class="ui positive right labeled button" type='submit' name='submit' value='Submit' />
+            </form>
+            </div>
+ 
+        </div>
+        <div class="actions">
+            {% if user.is_authenticated %}
+            <div id="new_post_submit_styled" class="ui positive right labeled button">
+                Submit
+            </div>
+            {% else %}
+            <p>You must log in to make a post.</p>
             {% endif %}
         </div>
     </div>
 
-    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-    <script type='text/javascript' src="{% static 'Alexandra/jquery.fullPage.js' %}"></script>
-    <script type='text/javascript'>
-        $(document).ready(function() {
-            $('#fullpage').fullpage({
-			    scrollingSpeed: 1000
+    <div id="authmodal" class="ui modal">
+        <i class="close icon"></i>
+<!-- Authenticated User -->
+        {% if user.is_authenticated %}
+        <div class="header">
+            Log Out
+        </div>
+        <div class="content">
+            <div class="ui form segment">
+                Are you sure you want to log out?
+            </div>
+        </div>
+        <div class="actions">
+            <form method="post" action="{% url 'auth_logout' %}?next={% url 'posts' %}">
+                {% csrf_token %}
+                <input type="submit" value="Log Out" class="ui positive right labeled button" />
+            </form>
+        </div>
+<!-- Non-Authenticated User -->
+        {% else %}
+        <div class="header">
+            Sign in or Register
+        </div>
+        <br/>
+        <br/>   
+        <div class="ui two column middle aligned relaxed fitted stackable grid" style="position:relative;">
+            <div class="column">
+                <div class="ui center aligned header">Sign In</div>
+                <div class="content">
+                    <div class="ui form segment">
+                        <form method="post" action="{% url 'auth_login' %}">
+                            {% csrf_token %}
+                            {{ l_form.as_p }}
+                            <input type="submit" value="Submit" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="ui vertical divider">OR</div>
+            <div class="column">
+                <div class="ui center aligned header">Register</div>
+                <div class="content">
+                    <div class="ui form segment">
+                        <form method="post" action="{% url 'registration_register' %}">
+                            {% csrf_token %}
+                            {{ r_form.as_p }}
+                            <input type="submit" value="Submit" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <br/>
+        </div>
+        <br/>
+        {% endif %}
+    </div>
+
+    <div id="singlepostmodal" class="ui basic long modal">
+        <i class="white close icon"></i>
+        <div class="content">
+            <div class="description">
+                <h3 id="singlepostdescription"></h3>
+            </div>
+        </div>
+        <div class="content">
+            <div class="ui large image">
+                <img id="singlepostimage" src='{{ post.image.url }}' alt='user image'/></a>
+            </div>
+        </div>
+<!--        <div class="content">
+            <div class="ui comments">
+                <div class="ui segment">
+                    <h3 class="ui dividing header">Comments</h3>
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="">
+                        </a>
+                        <div class="content">
+                            <a class="author">User1</a>
+                            <div class="metadata">
+                                <span class="date">Today at 5:42PM</span>
+                            </div>
+                            <div class="text">
+                                the comment.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form class="ui reply form">
+                    <div class="field">
+                        <input type="text"></input>
+                    </div>
+                    <div class="ui blue labeled submit icon button">
+                        <i class="icon edit"></i>Comment
+                    </div>
+                </form>
+            </div> 
+        </div>-->
+    </div>
+
+    <!--========================================->
+        END-MODALS
+    <==========================================-->
+
+    <!--========================================->
+        FOOTER
+    <==========================================-->
+
+    <div class="main footer">
+        <div class="ui divider"></div>
+        <div class="ui center aligned grid">
+            <div class="column">
+                <div class="ui divided horizontal footer link list">
+                    <div class="item">
+                        Piper
+                    </div>
+                    <div class="item">
+                        <a href="{% static 'Alexandra/Leg5APIDoc.pdf' %}">API Documentation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--========================================->
+        END-FOOTER
+    <==========================================-->
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="{% static 'Alexandra/Semantic/semantic.js' %}"> </script>
+    <script type="text/javascript" src="{% static 'Alexandra/piper.js' %}"></script>
+
+    <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+   
+    <!-- chat functions -->
+    <script type="text/javascript">
+    
+        $(document).ready(function(){
+            {% if user.is_authenticated %}
+                toggleSidebar();
+            {% endif %}
+
+            var socket = io.connect('http://piper.link', {path: '/nodejs/socket.io'});
+
+            socket.on('connect', function(){
+                /*console.log("connect");*/
+                $('#comment').attr('placeholder', 'Chat here!');
+            });
+      
+            var entry_el = $('#comment');
+                
+            $('#comments').prepend('<p>' + ' ' + '</p>');
+               
+            socket.on('message', function(message) {
+                
+                var data = message.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+                /*$('#comments').children().first().remove()
+                $('#comments').append('<p>' + data + '</p>');*/
+                /*$('#comments').children().last().remove();*/
+                $('#comments').prepend('<p>' + data + '</p>');
+                entry_el.focus();
+            });
+                     
+            entry_el.keypress(function(event){
+                if(event.keyCode != 13) return;
+                
+                var msg = entry_el.val();
+                if(msg){
+                    socket.emit('send_message', { message: msg, username: "{{user.username}}", id: {{user.id}}}, function(data){
+                    });
+                   }
+                 $('#comment').val("");
+
             });
         });
-    </script>
+  </script>
+</div>
+  <div class="ui right demo sidebar vertical inverted menu push overlay">
+    <h1 class="header item">Freestyle</h1>
+    <input class="item" id="comment" name="chatbox" type="text" placeholder="Loading chat...">
+    <div class="item" id="comments">
+<!--        {% for comment in comments %}
+            <p>{{comment.text}}</p>
+        {% endfor %}-->
+    </div>
+  </div>
+  <script type="text/javascript">
+        function toggleSidebar() {
+            $('.demo.sidebar').sidebar('setting',{ 
+                transition: "overlay",
+                dimPage: 0,
+                mobileTransition: "overlay"
+            }).sidebar('toggle');
+        };
+  </script>
 </body>
 </html>
+
