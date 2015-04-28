@@ -365,7 +365,7 @@
                 var data = message.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
                 /*$('#comments').children().first().remove()
                 $('#comments').append('<p>' + data + '</p>');*/
-                $('#comments').children().pop();
+                $('#comments').children()[$('#comments').children().length()].remove();
                 $('#comments').prepend('<p>' + data + '</p>');
                 entry_el.focus();
             });
@@ -374,10 +374,8 @@
                 if(event.keyCode != 13) return;
                 
                 var msg = entry_el.val();
-                /*console.log(msg);*/
                 if(msg){
                     socket.emit('send_message', { message: msg, username: "{{user.username}}", id: {{user.id}}}, function(data){
-                         /*console.log(data);*/
                     });
                    }
                  $('#comment').val("");
@@ -402,9 +400,7 @@
                 dimPage: 0,
                 mobileTransition: "overlay"
             }).sidebar('toggle');
-            /*console.log($('.demo.sidebar'));*/
         };
-        /*console.log("???");*/
   </script>
 </body>
 </html>

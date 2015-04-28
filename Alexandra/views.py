@@ -39,8 +39,8 @@ def posts(request):
 #                                      id=(User_post.objects.get(post=x.id).user)).username},
 #                            latest_posts)
     
-#    comments = Comments.objects.order_by('-created_at')[:10:-1]
-    comments = Comments.objects.order_by('created_at')[:10]
+    comments = Comments.objects.order_by('-created_at')[:10:-1]
+    comments = reversed(comments)
     context = {'latest_posts':latest_posts,
                 'form':PostForm(),
                 'comments': comments, 
