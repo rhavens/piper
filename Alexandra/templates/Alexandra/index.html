@@ -114,8 +114,8 @@
         <!-- Vertical scrolling -->
         <div id="postsscroll" class="ten wide column">
             <div id="postlist" class="ui segment">
-{% for post in latest_posts %}
-            <!--<div class="ui vertical segment">
+<!--{% for post in latest_posts %}
+            <div class="ui vertical segment">
                 <div class="content">
 {% if post.image %}
                     <a href="javascript:void(0);" onclick="LoadSinglePost({{post.id}});return false;"><img id="postimage{{post.id}}" class="ui image center" src='{{ post.image.url }}' alt='user image'/></a>
@@ -149,8 +149,8 @@
                     </div>
                     </div>
                 </div>
-            </div>-->
-{% endfor %}
+            </div>
+{% endfor %}-->
             </div>
         </div>
         <!-- /Vertical scrolling -->
@@ -354,7 +354,7 @@
             var socket = io.connect('http://piper.link', {path: '/nodejs/socket.io'});
 
             socket.on('connect', function(){
-                console.log("connect");
+                /*console.log("connect");*/
                 $('#comment').attr('placeholder', 'Chat here!');
             });
       
@@ -363,8 +363,10 @@
             socket.on('message', function(message) {
                 
                 var data = message.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-                $('#comments').children().first().remove()
-                $('#comments').append('<p>' + data + '</p>');
+                /*$('#comments').children().first().remove()
+                $('#comments').append('<p>' + data + '</p>');*/
+                $('#comments').children().pop();
+                $('#comments').prepend('<p>' + data + '</p>');
                 entry_el.focus();
             });
                      
@@ -372,10 +374,10 @@
                 if(event.keyCode != 13) return;
                 
                 var msg = entry_el.val();
-                console.log(msg);
+                /*console.log(msg);*/
                 if(msg){
                     socket.emit('send_message', { message: msg, username: "{{user.username}}", id: {{user.id}}}, function(data){
-                         console.log(data);
+                         /*console.log(data);*/
                     });
                    }
                  $('#comment').val("");
@@ -385,13 +387,13 @@
   </script>
 </div>
   <div class="ui right demo sidebar vertical inverted menu push overlay">
-    <h1 class="header item">Chat</a>
+    <h1 class="header item">Chat</h1>
+    <input class="item" id="comment" name="chatbox" type="text" placeholder="Loading chat...">
     <div class="item" id="comments">
         {% for comment in comments %}
             <p>{{comment.text}}</p>
         {% endfor %}
     </div>
-    <input class="item" id="comment" name="chatbox" type="text" placeholder="Loading chat...">
   </div>
   <script type="text/javascript">
         function toggleSidebar() {
@@ -400,12 +402,9 @@
                 dimPage: 0,
                 mobileTransition: "overlay"
             }).sidebar('toggle');
-            console.log($('.demo.sidebar'));
+            /*console.log($('.demo.sidebar'));*/
         };
-
-
-
-        console.log("???");
+        /*console.log("???");*/
   </script>
 </body>
 </html>
