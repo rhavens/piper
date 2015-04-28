@@ -32,7 +32,7 @@
         </a>
         <a id="newpostbutton" class="item">
             <i class="comment outline icon"></i>
-            New Post
+            New Note
         </a>
         <a id="authbutton" class="item">
             {% if user.is_authenticated %}
@@ -45,8 +45,8 @@
         </a>
         {% if user.is_authenticated %}
         <a id="togglechat" class="item" onclick="toggleSidebar()">
-          <i class="content icon"></i>
-          <span class="text">Chatbox</span>
+          <i class="comments outline icon"></i>
+          <span class="text">Freestyle</span>
         </a>
         {% endif %}
     </div>
@@ -387,7 +387,7 @@
   </script>
 </div>
   <div class="ui right demo sidebar vertical inverted menu push overlay">
-    <h1 class="header item">Chat</h1>
+    <h1 class="header item">Freestyle</h1>
     <input class="item" id="comment" name="chatbox" type="text" placeholder="Loading chat...">
     <div class="item" id="comments">
 <!--        {% for comment in comments %}
