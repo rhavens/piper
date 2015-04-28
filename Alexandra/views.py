@@ -5,8 +5,6 @@ from django.http import HttpResponse, HttpResponseServerError
 from django.core import serializers
 from django import forms
 from django.template import RequestContext
-
-
 from .models import Post
 from .models import PostForm
 from .models import User_post

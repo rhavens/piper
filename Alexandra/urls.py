@@ -18,6 +18,7 @@ url(r'^new_post/', views.new_post, name = 'new_post'),
 url(r'^api/posts/', include(post_resource.urls)),
 url(r'^api/users/', include(user_resource.urls)),
 (r'^accounts/', include('registration.backends.simple.urls'))
+
 # url(r'^api/posts/doc/', include('tastypie_swagger.urls', namespace='post_tastypie_swagger'),
 # kwargs={"tastypie_api_module":"Alexandra.registration.posts", "namespace":"post_tastypie_swagger"}
 # ),
