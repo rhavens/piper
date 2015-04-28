@@ -56,53 +56,12 @@
     </div>
     <div class="two wide column"></div>
     <div class="ui center aligned grid site-bg">
-
         <!-- Vertical scrolling -->
         <div id="postsscroll" class="ten wide column">
             <div id="postlist" class="ui segment">
-<!--{% for post in latest_posts %}
-            <div class="ui vertical segment">
-                <div class="content">
-{% if post.image %}
-                    <a href="javascript:void(0);" onclick="LoadSinglePost({{post.id}});return false;"><img id="postimage{{post.id}}" class="ui image center" src='{{ post.image.url }}' alt='user image'/></a>
-{% endif %}
-                    <p id="posttext{{post.id}}">{{post.text_content}}</p>
-                    <div class="left aligned column">
-                    <div class="ui comments">
-                        <h3 class="ui dividing header">Comments</h3>
-                        <div class="comment">
-                            <a class="avatar">
-                                <img src="">
-                            </a>
-                            <div class="content">
-                                <a class="author">User1</a>
-                                <div class="metadata">
-                                    <span class="date">Today at 5:42PM</span>
-                                </div>
-                                <div class="text">
-                                    the comment.
-                                </div>
-                            </div>
-                        </div>
-                        <form class="ui reply form">
-                            <div class="field">
-                                <input type="text"></input>
-                            </div>
-                            <div class="ui blue labeled submit icon button">
-                                <i class="icon edit"></i>Comment
-                            </div>
-                        </form>
-                    </div>
-                    </div>
-                </div>
-            </div>
-{% endfor %}-->
             </div>
         </div>
         <!-- /Vertical scrolling -->
-
-
-        <!--<div class="three wide column"></div>-->
     </div>
 
 
@@ -224,35 +183,6 @@
                 <img id="singlepostimage" src='{{ post.image.url }}' alt='user image'/></a>
             </div>
         </div>
-<!--        <div class="content">
-            <div class="ui comments">
-                <div class="ui segment">
-                    <h3 class="ui dividing header">Comments</h3>
-                    <div class="comment">
-                        <a class="avatar">
-                            <img src="">
-                        </a>
-                        <div class="content">
-                            <a class="author">User1</a>
-                            <div class="metadata">
-                                <span class="date">Today at 5:42PM</span>
-                            </div>
-                            <div class="text">
-                                the comment.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <form class="ui reply form">
-                    <div class="field">
-                        <input type="text"></input>
-                    </div>
-                    <div class="ui blue labeled submit icon button">
-                        <i class="icon edit"></i>Comment
-                    </div>
-                </form>
-            </div> 
-        </div>-->
     </div>
 
     <!--========================================->
@@ -311,9 +241,6 @@
             socket.on('message', function(message) {
                 
                 var data = message.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-                /*$('#comments').children().first().remove()
-                $('#comments').append('<p>' + data + '</p>');*/
-                /*$('#comments').children().last().remove();*/
                 $('#comments').prepend('<p>' + data + '</p>');
                 entry_el.focus();
             });
@@ -336,9 +263,6 @@
     <h1 class="header item">Freestyle</h1>
     <input class="item" id="comment" name="chatbox" type="text" placeholder="Loading chat...">
     <div class="item" id="comments">
-<!--        {% for comment in comments %}
-            <p>{{comment.text}}</p>
-        {% endfor %}-->
     </div>
   </div>
   <script type="text/javascript">
