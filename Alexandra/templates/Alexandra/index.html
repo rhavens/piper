@@ -365,7 +365,7 @@
                 var data = message.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
                 /*$('#comments').children().first().remove()
                 $('#comments').append('<p>' + data + '</p>');*/
-                $('#comments').children()[$('#comments').children().length()].remove();
+                $('#comments').children().last().remove();
                 $('#comments').prepend('<p>' + data + '</p>');
                 entry_el.focus();
             });
