@@ -21,6 +21,7 @@
         <div class="one wide row"></div>
         <div class="one wide row"></div>
         <h1 class="ui center aligned header title-text">
+            <img src="{% static 'Alexandra/logo.gif' %}" style="width:125px;"/>
             {% if user.username %}
                 {{ user.username }}'s Piper
             {% else %}
@@ -53,66 +54,8 @@
         </a>
         {% endif %}
     </div>
-
+    <div class="two wide column"></div>
     <div class="ui center aligned grid site-bg">
-        <!--
-        <div class="two wide column"></div>
-        <div class="three wide column">
-            <div class="ui card">
-                <div class="image">
-                    <img src="" alt="profile picture"/>
-                </div>
-                <div class="content">
-                    <a class="header">Name</a>
-                    <div class="description">
-                        Some status
-                    </div>
-                    <div class="extra content">
-                        <div class="ui feed">
-                            <div class="event">
-                                <div class="label">
-                                    <img src="" alt="thumbnail"/>
-                                </div>
-                                <div class="content">
-                                    <div class="summary">
-                                        <a href="#" class="user">
-                                            Some user
-                                        </a> did something
-                                    </div>
-                                </div>
-                            </div>
- 
-                            <div class="event">
-                                <div class="label">
-                                    <img src="" alt="thumbnail"/>
-                                </div>
-                                <div class="content">
-                                    <div class="summary">
-                                        <a href="#" class="user">
-                                            Some user
-                                        </a> did something
-                                    </div>
-                                </div>
-                            </div>
- 
-                            <div class="event">
-                                <div class="label">
-                                    <img src="" alt="thumbnail"/>
-                                </div>
-                                <div class="content">
-                                    <div class="summary">
-                                        <a href="#" class="user">
-                                            Some user
-                                        </a> did something
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
 
         <!-- Vertical scrolling -->
         <div id="postsscroll" class="ten wide column">
