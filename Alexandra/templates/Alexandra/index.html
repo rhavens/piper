@@ -359,6 +359,8 @@
             });
       
             var entry_el = $('#comment');
+                
+            $('#comments').prepend('<p>' + ' ' + '</p>');
                
             socket.on('message', function(message) {
                 
