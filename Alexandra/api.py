@@ -5,19 +5,19 @@ from Alexandra.models import Post, User
 
 class UserObjectsAuthorization(Authorization):
     def read_list(self, object_list, bundle):
-        return object_list
+        return []
+#        return object_list
     def read_detail(self, object_list, bundle):
-        return True
+        return False
+#        return True
     def create_list(self, object_list, bundle):
         return object_list
     def create_detail(self, object_list, bundle):
         return True
     def update_list(self, object_list, bundle):
-# update later once user auth exists
-        return object_list
+        return []
     def update_detail(self, object_list, bundle):
-# update later once user auth exists
-        return True
+        return False
     def delete_list(self, object_list, bundle):
         raise Unauthorized("Users cannot be deleted")
     def delete_detail(self, object_list, bundle):
@@ -33,17 +33,13 @@ class PostObjectsAuthorization(Authorization):
     def create_detail(self, object_list, bundle):
         return True
     def update_list(self, object_list, bundle):
-# update later once user auth exists
         return []
     def update_detail(self, object_list, bundle):
-# update later once user auth exists
         return False
     def delete_list(self, object_list, bundle):
-# update later once user auth exists
-        return object_list
+        return []
     def delete_detail(self, object_list, bundle):
-# update later once user auth exists
-        return True
+        return False
 
 
 class UserResource(ModelResource):
