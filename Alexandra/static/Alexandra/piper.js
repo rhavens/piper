@@ -31,11 +31,11 @@ $(document).ready(function () {
 function RenderPost(post) {
     var posthtml = 
     "<div class='ui vertical segment'>" +
-        "<div class='content'>";
+        "<div class='content' style='text-align:center;'>";
     var postimagesplit = post.image.split("/");
     if (postimagesplit[postimagesplit.length - 1] != "NULL") {
         posthtml +=
-            "<a href='javascript:void(0);' onclick='LoadSinglePost(" + post['id'] + ");return false;'><img id='postimage" + post['id'] + "' class='ui image center' src='" + post['image'] + "' alt='user image'/></a>";
+            "<a href='javascript:void(0);' onclick='LoadSinglePost(" + post['id'] + ");return false;'><img id='postimage" + post['id'] + "' class='ui image center' src='" + post['image'] + "' alt='user image' style='margin:auto;'/></a>";
     }
     posthtml +=
     "<p id='posttext" + post['id'] + "'>" + post['text_content'] + "</p>" +
